@@ -5,7 +5,7 @@ from app.menu import show_menu
 
 def main():
     calculator = DivisaCalculator()
-    calculator.display_current_rates()
+    print(calculator.get_exchange_rates_report())
 
     while True:
         opcion = show_menu()

@@ -1,3 +1,16 @@
+# from app.api_data import get_exchange_rates
+
+# class DivisaCalculator:
+#     def __init__(self):
+#         self.tasa_bcv, self.tasa_mercado_cruda, self.tasa_mercado_redondeada = get_exchange_rates()
+#         if not all([self.tasa_bcv, self.tasa_mercado_cruda, self.tasa_mercado_redondeada]):
+#             print("No se pudo obtener la información de las tasas de cambio. Saliendo.")
+#             exit()
+        
+#     def display_current_rates(self):
+#         print(f"Tasa Oficial (BCV): {self.tasa_bcv:.4f} Bs/USD")
+#         print(f"Tasa de Mercado (consultada): {self.tasa_mercado_cruda:.4f} Bs/USD")
+#         print(f"Tasa de Mercado (redondeada): {self.tasa_mercado_redondeada:.4f} Bs/USD")
 # app/calculator.py
 
 from app.api_data import get_exchange_rates
@@ -9,11 +22,36 @@ class DivisaCalculator:
             print("No se pudo obtener la información de las tasas de cambio. Saliendo.")
             exit()
         
+    def get_exchange_rates_report(self):
+        """Genera un reporte completo de las tasas de cambio."""
+        
+        # Diferencia cambiaria en cifras
+        diferencia_cifras = self.tasa_mercado_cruda - self.tasa_bcv
+        
+        # Diferencia cambiaria en porcentaje
+        diferencia_porcentaje = (diferencia_cifras / self.tasa_bcv) * 100
+        
+        # IAC (Índice de Ahorro para el Comprador)
+        iac = ((self.tasa_mercado_cruda / self.tasa_bcv) - 1) * 100
+        
+        # FPC (Factor de Poder de Compra)
+        fpc = self.tasa_mercado_cruda / self.tasa_bcv
+
+        reporte = (
+            f"📊 *Reporte de Tasas de Cambio*\n\n"
+            f"Tasa Oficial (BCV): {self.tasa_bcv:.4f} Bs/USD\n"
+            f"Tasa Mercado (Cruda): {self.tasa_mercado_cruda:.4f} Bs/USD\n"
+            f"Tasa Mercado (Redondeada): {self.tasa_mercado_redondeada:.4f} Bs/USD\n\n"
+            f"Diferencia Cambiaria: {diferencia_cifras:.4f} Bs/USD ({diferencia_porcentaje:.2f}%)\n"
+            f"IAC (%): {iac:.2f}%\n"
+            f"FPC: {fpc:.4f}\n"
+        )
+        return reporte
+
     def display_current_rates(self):
-        print(f"Tasa Oficial (BCV): {self.tasa_bcv:.4f} Bs/USD")
-        print(f"Tasa de Mercado (consultada): {self.tasa_mercado_cruda:.4f} Bs/USD")
-        print(f"Tasa de Mercado (redondeada): {self.tasa_mercado_redondeada:.4f} Bs/USD")
-    
+        # Esta función ahora será llamada por el nuevo método
+        print(self.get_exchange_rates_report())
+        
     def run_analysis_de_compra(self):
         try:
             costo_producto = float(input("\nIngresa el costo del producto en USD: "))

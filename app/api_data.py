@@ -1,5 +1,4 @@
 # app/api_data.py
-
 import requests
 
 def get_exchange_rates():
