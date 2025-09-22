@@ -56,14 +56,16 @@ def calculate_metrics_oportunidad(dolares_a_vender, tasa_bcv, tasa_mercado_redon
         f"📊 *Costo de Oportunidad*\n"
         f"Divisas: ${dolares_a_vender:.2f}\n"
         "=======================================\n"
-        "{:<10} | {:<10} | {:<12}\n".format("Tasa", "Pérdida (Bs)", "Pérdida ($Merc)")
+        "{:<10} | {:<10} | {:<12} | {:<20}\n".format("Tasa", "Pérdida (Bs)", "Pérdida ($Merc)", "Poder de Compra (BCV USD)")
     )
     
     for tasa_actual in tasas_a_evaluar:
         valor_actual_bolivares = dolares_a_vender * tasa_actual
         perdida_bolivares = valor_max_bolivares - valor_actual_bolivares
         perdida_usd_mercado = perdida_bolivares / tasa_mercado_redondeada
-        response += "{:<10.2f} | {:<10.2f} | {:<12.2f}\n".format(tasa_actual, perdida_bolivares, perdida_usd_mercado)
+        poder_compra_bcv = (dolares_a_vender * tasa_actual) / tasa_bcv # NUEVO CÁLCULO
+        
+        response += "{:<10.2f} | {:<10.2f} | {:<12.2f} | {:<20.2f}\n".format(tasa_actual, perdida_bolivares, perdida_usd_mercado, poder_compra_bcv)
     
     return response
 
