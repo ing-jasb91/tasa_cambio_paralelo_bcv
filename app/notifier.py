@@ -28,6 +28,7 @@ CHAT_ID = '552061604'
 # --- Constantes para los estados de conversación ---
 ANALISIS_COMPRA = 1
 COSTO_OPORTUNIDAD = 2
+CAMBIO_DIVISAS = 3 # NUEVA OPCIÓN
 
 # --- Funciones de Cálculo ---
 def calculate_metrics_compra(costo_producto, dolares_disponibles, tasa_bcv, tasa_mercado_redondeada):
@@ -63,9 +64,51 @@ def calculate_metrics_oportunidad(dolares_a_vender, tasa_bcv, tasa_mercado_redon
         valor_actual_bolivares = dolares_a_vender * tasa_actual
         perdida_bolivares = valor_max_bolivares - valor_actual_bolivares
         perdida_usd_mercado = perdida_bolivares / tasa_mercado_redondeada
-        poder_compra_bcv = (dolares_a_vender * tasa_actual) / tasa_bcv # NUEVO CÁLCULO
+        poder_compra_bcv = (dolares_a_vender * tasa_actual) / tasa_bcv
         
         response += "{:<10.2f} | {:<10.2f} | {:<12.2f} | {:<20.2f}\n".format(tasa_actual, perdida_bolivares, perdida_usd_mercado, poder_compra_bcv)
+    
+    return response
+
+# NUEVA FUNCIÓN
+
+def calculate_price_conversion(usd_price, tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada):
+    precio_bcv = usd_price * tasa_bcv
+    precio_mercado = usd_price * tasa_mercado_cruda
+    tasa_mercado_con_igtf = tasa_mercado_cruda * 1.0348
+    
+    # Diferencia cambiaria (Mercado vs BCV)
+    diferencia_cifras = tasa_mercado_con_igtf - tasa_bcv
+    diferencia_porcentaje = (diferencia_cifras / tasa_bcv) * 100
+    
+    # Diferencia de precio (Mercado vs BCV)
+    diferencia_precio_mercado_bcv = precio_mercado - precio_bcv
+
+    # Nuevo cálculo de diferencia con IGTF
+    precio_mercado_con_igtf = precio_mercado * 1.0348
+    diferencia_con_igtf = precio_mercado_con_igtf - precio_bcv
+
+    response = (
+        f"💰 *Conversión de Divisas*\n"
+        f"Monto en USD: ${usd_price:.2f}\n"
+        f"Tasa BCV: {tasa_bcv:.2f} Bs/USD\n"
+        f"Tasa Mercado: {tasa_mercado_cruda:.2f} Bs/USD\n"
+        f"Tasa Mercado + IGTF: {tasa_mercado_con_igtf:.2f} Bs/USD\n"
+        f"  (Diferencia vs BCV: {diferencia_cifras:.2f} Bs/USD | {diferencia_porcentaje:.2f}%)\n"
+        f"=======================================\n\n"
+        f"Precio en Bs (BCV): {precio_bcv:.2f}\n"
+        f"Precio en Bs (Mercado con IGTF): {precio_mercado_con_igtf:.2f}\n"
+        f"Diferencia (con 3.48% IGTF): {diferencia_con_igtf:.2f}\n"
+        "---------------------------------------\n\n"
+        "Precios en un rango de tasas:\n"
+        "{:<10} | {:<12} | {:<15}\n".format("Tasa", "Precio (Bs)", "Diferencia (Bs)")
+    )
+
+    tasas_a_evaluar = [tasa_mercado_redondeada - (i * 10) for i in range(6)]
+    for tasa in tasas_a_evaluar:
+        precio_rango = usd_price * tasa
+        diferencia_precio = precio_rango - precio_bcv # Diferencia con el precio BCV
+        response += "{:<10.2f} | {:<12.2f} | {:<15.2f}\n".format(tasa, precio_rango, diferencia_precio)
     
     return response
 
@@ -102,6 +145,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("📊 Análisis de Compra", callback_data='analisis_compra')],
         [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='costo_oportunidad')],
+        [InlineKeyboardButton("💱 Cambio de Divisas", callback_data='cambio_divisas')] # NUEVO BOTÓN
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text('¡Hola! Elige una opción para continuar:', reply_markup=reply_markup)
@@ -121,6 +165,11 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(
             text="Ingresa la cantidad de divisas que tienes para vender (ej: `300`)"
         )
+    elif query.data == 'cambio_divisas': # NUEVA LÓGICA
+        context.user_data['state'] = CAMBIO_DIVISAS
+        await query.edit_message_text(
+            text="Ingresa el precio del producto o servicio en USD (ej: `50`)"
+        )
 
 async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Maneja los mensajes de texto del usuario según el estado actual."""
@@ -130,9 +179,9 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         valores = [float(val) for val in update.message.text.split()]
-        tasa_bcv, _, tasa_mercado_redondeada = get_exchange_rates()
+        tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada = get_exchange_rates()
         
-        if not all([tasa_bcv, tasa_mercado_redondeada]):
+        if not all([tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada]):
             await update.message.reply_text("No se pudieron obtener las tasas de cambio.")
             return
 
@@ -148,9 +197,15 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
             response = calculate_metrics_oportunidad(valores[0], tasa_bcv, tasa_mercado_redondeada)
 
+        elif context.user_data['state'] == CAMBIO_DIVISAS:
+            if len(valores) != 1:
+                await update.message.reply_text("❌ Entrada incorrecta. Debes ingresar un solo número: el precio en USD.")
+                return
+            response = calculate_price_conversion(valores[0], tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada)
+        
         await update.message.reply_text(response, parse_mode="Markdown")
-        context.user_data.pop('state', None) # Limpiar el estado
-        await start(update, context) # Volver a mostrar el menú
+        context.user_data.pop('state', None)
+        await start(update, context)
     
     except ValueError:
         await update.message.reply_text("❌ Formato incorrecto. Por favor, ingresa solo números.")
