@@ -18,7 +18,8 @@ from app.api_data import get_exchange_rates
 # Habilitar el logging para ver mensajes de error
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    # level=logging.INFO
+    level=logging.ERROR
 )
 
 # --- Configuración del Bot de Telegram ---
