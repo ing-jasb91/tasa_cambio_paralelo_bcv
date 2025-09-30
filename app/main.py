@@ -1,7 +1,7 @@
 # app/main.py
 
-from app.calculator import DivisaCalculator
-from app.menu import show_menu
+from src.calculator import DivisaCalculator
+from src.menu import show_menu
 
 def main():
     calculator = DivisaCalculator()

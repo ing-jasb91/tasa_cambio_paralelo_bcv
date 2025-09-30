@@ -13,7 +13,8 @@ from telegram.ext import (
     filters,
     JobQueue
 )
-from app.api_data import get_exchange_rates
+# from app.api_data import get_exchange_rates
+from src.data_fetcher import get_exchange_rates
 
 # Habilitar el logging para ver mensajes de error
 logging.basicConfig(
@@ -23,7 +24,8 @@ logging.basicConfig(
 )
 
 # --- Configuración del Bot de Telegram ---
-BOT_TOKEN = '8237802820:AAHqF-v8UO1lUPLD4SL9x3AoK3QzYepN_Ok'
+# BOT_TOKEN = '8237802820:AAHqF-v8UO1lUPLD4SL9x3AoK3QzYepN_Ok'
+BOT_TOKEN = '8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I'
 CHAT_ID = '552061604'
 
 # --- Constantes para los estados de conversación ---
