@@ -3,7 +3,7 @@
 import sqlite3
 import os
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta # <--- CORREGIDO: Añadido timedelta
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -25,12 +25,11 @@ def _connect_db():
         return None
 
 def initialize_db():
-    """Asegura que el directorio exista y crea la tabla daily_rates si no existe."""
+    """Asegura que el directorio exista y crea la tabla exchange_rates si no existe."""
     
     # 1. Crear el directorio 'data' si no existe
     if not os.path.exists(DB_FOLDER_PATH):
         try:
-            # os.makedirs crea la carpeta y cualquier carpeta intermedia
             os.makedirs(DB_FOLDER_PATH)
             logger.info(f"Directorio de datos creado en: {DB_FOLDER_PATH}")
         except OSError as e:
@@ -57,97 +56,41 @@ def initialize_db():
                 TRY_BCV REAL,
                 RUB_BCV REAL,
                 USD_MERCADO_CRUDA REAL,
-                EUR_USD_IMPLICITA REAL,  -- ¡Nueva columna!
-                EUR_USD_FOREX REAL      -- ¡Nueva columna!
+                EUR_USD_IMPLICITA REAL,
+                EUR_USD_FOREX REAL
             )
         """)
         conn.commit()
-        logger.info("Base de datos SQLite inicializada y tabla 'daily_rates' verificada.")
+        logger.info("Base de datos SQLite inicializada y tabla 'exchange_rates' verificada.")
     except sqlite3.Error as e:
         logger.error(f"Error al inicializar la base de datos: {e}")
     finally:
         if conn:
             conn.close()
 
-# def insert_rates(data):
-#     """Inserta una nueva fila de tasas en la tabla daily_rates, forzando los tipos."""
-#     conn = _connect_db()
-#     if conn is None:
-#         return False # Indica fallo de conexión
-
-#     # Mapeo de columnas para asegurar el orden y la integridad (DEBE COINCIDIR con la tabla)
-#     columns = (
-#         'timestamp', 'date', 
-#         'USD_BCV', 'EUR_BCV', 
-#         'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
-#         'USD_MERCADO_CRUDA', 'EUR_USD_IMPLICITA', 'EUR_USD_FOREX'
-#     )
-    
-#     # Lógica de robustez: Asegura que las tasas sean float o None
-#     values = []
-#     # Definimos qué columnas deben ser números (REAL en SQL)
-#     rate_columns = ['USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 'USD_MERCADO_CRUDA', 'EUR_USD_IMPLICITA', 'EUR_USD_FOREX']
-    
-#     for col in columns:
-#         value = data.get(col)
-        
-#         if col in rate_columns:
-#             # Intenta convertir a float. Si falla (ValueError) o es None, usa None.
-#             try:
-#                 values.append(float(value) if value is not None else None)
-#             except (ValueError, TypeError):
-#                 # Si el valor de la tasa no es un número válido, guarda None
-#                 values.append(None)
-#         else:
-#             # Para 'timestamp' y 'date' (TEXT), usa el valor original
-#             values.append(value)
-            
-#     values = tuple(values)
-
-#     placeholders = ', '.join(['?'] * len(columns))
-#     sql = f"INSERT INTO daily_rates ({', '.join(columns)}) VALUES ({placeholders})"
-
-#     try:
-#         cursor = conn.cursor()
-#         cursor.execute(sql, values)
-#         conn.commit()
-#         logger.info(f"Tasas insertadas en SQLite: {data.get('date', 'Desconocida')}")
-#         return True
-#     except sqlite3.IntegrityError:
-#         # Fallo por repetición de clave primaria (timestamp)
-#         logger.warning(f"Error de integridad: Ya existe un registro para {data.get('timestamp', 'Desconocido')}.")
-#         return False
-#     except sqlite3.Error as e:
-#         logger.error(f"FALLO DE SQLITE: Error al insertar datos: {e}")
-#         return False
-#     finally:
-#         if conn:
-#             conn.close()
-
 def insert_rates(data):
-    """Inserta una nueva fila de tasas en la tabla daily_rates, forzando los tipos."""
+    """Inserta una nueva fila de tasas en la tabla exchange_rates, forzando los tipos."""
     conn = _connect_db()
     if conn is None:
         return False # Indica fallo de conexión
 
-    # Mapeo de columnas: ¡CORREGIDO! Incluye las dos nuevas columnas.
+    # Mapeo de columnas para asegurar el orden y la integridad
     columns = (
         'timestamp', 'date', 
         'USD_BCV', 'EUR_BCV', 
         'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
         'USD_MERCADO_CRUDA',
-        'EUR_USD_IMPLICITA',  # <--- CORREGIDO: AÑADIDA
-        'EUR_USD_FOREX'       # <--- CORREGIDO: AÑADIDA
+        'EUR_USD_IMPLICITA', 
+        'EUR_USD_FOREX'
     )
     
     # Lógica de robustez: Asegura que las tasas sean float o None
     values = []
-    # Definimos qué columnas deben ser números (REAL en SQL): ¡CORREGIDO!
     rate_columns = [
         'USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
         'USD_MERCADO_CRUDA',
-        'EUR_USD_IMPLICITA',  # <--- CORREGIDO: AÑADIDA
-        'EUR_USD_FOREX'       # <--- CORREGIDO: AÑADIDA
+        'EUR_USD_IMPLICITA',
+        'EUR_USD_FOREX'
     ]
     
     for col in columns:
@@ -167,6 +110,7 @@ def insert_rates(data):
     values = tuple(values)
 
     placeholders = ', '.join(['?'] * len(columns))
+    # NOTA: Asegúrate de usar el nombre de tabla correcto: 'exchange_rates'
     sql = f"INSERT INTO exchange_rates ({', '.join(columns)}) VALUES ({placeholders})"
 
     try:
@@ -212,6 +156,54 @@ def get_latest_rates():
             
     except sqlite3.Error as e:
         logger.error(f"Error al obtener las últimas tasas de SQLite: {e}")
+        return None
+    finally:
+        if conn:
+            conn.close()
+
+def get_24h_market_summary():
+    """
+    Calcula la tasa Máxima, Mínima y Promedio de USD_MERCADO_CRUDA
+    para los registros dentro de las últimas 24 horas.
+    """
+    conn = _connect_db()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        
+        # 1. Definir la marca de tiempo de hace 24 horas
+        time_24h_ago = datetime.now() - timedelta(hours=24)
+        time_limit_iso = time_24h_ago.isoformat()
+        
+        # 2. Consulta SQL para la agregación
+        cursor.execute("""
+            SELECT 
+                MAX(USD_MERCADO_CRUDA) AS Max_Tasa,
+                MIN(USD_MERCADO_CRUDA) AS Min_Tasa,
+                AVG(USD_MERCADO_CRUDA) AS Avg_Tasa,
+                COUNT(id) AS Total_Registros
+            FROM exchange_rates 
+            WHERE timestamp >= ?
+        """, (time_limit_iso,))
+        
+        summary_row = cursor.fetchone()
+
+        if summary_row and summary_row[0] is not None:
+            # Mapear la tupla de resultados a un diccionario
+            return {
+                'max': summary_row[0],
+                'min': summary_row[1],
+                'avg': summary_row[2],
+                'count': summary_row[3],
+                'period': 'Últimas 24h'
+            }
+        else:
+            return None
+            
+    except sqlite3.Error as e:
+        logger.error(f"Error al obtener el resumen de 24h: {e}")
         return None
     finally:
         if conn:
