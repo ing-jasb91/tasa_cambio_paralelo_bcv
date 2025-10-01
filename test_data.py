@@ -9,6 +9,8 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(name)s:%(message
 
 # --- PRUEBA 1: Extracción y Guardado (ESTO HACE LA INSERCIÓN) ---
 print("--- Ejecutando extracción y guardado ---")
+# La función get_exchange_rates() solo devuelve las tres tasas principales,
+# pero inserta todas las demás en la DB.
 tasa_bcv_usd, tasa_mercado_cruda, tasa_mercado_redondeada = get_exchange_rates()
 
 if tasa_bcv_usd:
@@ -18,7 +20,7 @@ if tasa_bcv_usd:
 else:
     print("❌ Fallo crítico en la extracción de tasas.")
 
-# --- PRUEBA 2: Consulta de la última tasa ---
+# --- PRUEBA 2: Consulta de la última tasa (AÑADIMOS LAS NUEVAS COLUMNAS) ---
 print("\n--- Resultado de get_latest_rates() (Consulta SQL) ---")
 latest_data = get_latest_rates()
 
@@ -29,6 +31,11 @@ if latest_data:
     print(f"  USD BCV: {latest_data.get('USD_BCV')}")
     print(f"  EUR BCV: {latest_data.get('EUR_BCV')}")
     print(f"  USD Mercado: {latest_data.get('USD_MERCADO_CRUDA')}")
+    print("--------------------------------------------------")
+    # LAS NUEVAS TASAS QUE QUEREMOS VER:
+    print(f"  EUR/USD (Implícita BCV): {latest_data.get('EUR_USD_IMPLICITA', 0.0):.4f}")
+    print(f"  EUR/USD (Forex Real):   {latest_data.get('EUR_USD_FOREX', 0.0):.4f}")
+    print("--------------------------------------------------")
     print(f"  Otras divisas: CNY={latest_data.get('CNY_BCV')}, TRY={latest_data.get('TRY_BCV')}, RUB={latest_data.get('RUB_BCV')}")
 else:
     print("❌ No se encontraron registros en la base de datos.")

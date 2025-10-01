@@ -47,7 +47,7 @@ def initialize_db():
         
         # Definición de la tabla (incluyendo todas las divisas)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS daily_rates (
+            CREATE TABLE IF NOT EXISTS exchange_rates (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT NOT NULL UNIQUE,
                 date TEXT NOT NULL,
@@ -56,8 +56,10 @@ def initialize_db():
                 CNY_BCV REAL,
                 TRY_BCV REAL,
                 RUB_BCV REAL,
-                USD_MERCADO_CRUDA REAL
-            );
+                USD_MERCADO_CRUDA REAL,
+                EUR_USD_IMPLICITA REAL,  -- ¡Nueva columna!
+                EUR_USD_FOREX REAL      -- ¡Nueva columna!
+            )
         """)
         conn.commit()
         logger.info("Base de datos SQLite inicializada y tabla 'daily_rates' verificada.")
@@ -67,24 +69,86 @@ def initialize_db():
         if conn:
             conn.close()
 
+# def insert_rates(data):
+#     """Inserta una nueva fila de tasas en la tabla daily_rates, forzando los tipos."""
+#     conn = _connect_db()
+#     if conn is None:
+#         return False # Indica fallo de conexión
+
+#     # Mapeo de columnas para asegurar el orden y la integridad (DEBE COINCIDIR con la tabla)
+#     columns = (
+#         'timestamp', 'date', 
+#         'USD_BCV', 'EUR_BCV', 
+#         'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
+#         'USD_MERCADO_CRUDA', 'EUR_USD_IMPLICITA', 'EUR_USD_FOREX'
+#     )
+    
+#     # Lógica de robustez: Asegura que las tasas sean float o None
+#     values = []
+#     # Definimos qué columnas deben ser números (REAL en SQL)
+#     rate_columns = ['USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 'USD_MERCADO_CRUDA', 'EUR_USD_IMPLICITA', 'EUR_USD_FOREX']
+    
+#     for col in columns:
+#         value = data.get(col)
+        
+#         if col in rate_columns:
+#             # Intenta convertir a float. Si falla (ValueError) o es None, usa None.
+#             try:
+#                 values.append(float(value) if value is not None else None)
+#             except (ValueError, TypeError):
+#                 # Si el valor de la tasa no es un número válido, guarda None
+#                 values.append(None)
+#         else:
+#             # Para 'timestamp' y 'date' (TEXT), usa el valor original
+#             values.append(value)
+            
+#     values = tuple(values)
+
+#     placeholders = ', '.join(['?'] * len(columns))
+#     sql = f"INSERT INTO daily_rates ({', '.join(columns)}) VALUES ({placeholders})"
+
+#     try:
+#         cursor = conn.cursor()
+#         cursor.execute(sql, values)
+#         conn.commit()
+#         logger.info(f"Tasas insertadas en SQLite: {data.get('date', 'Desconocida')}")
+#         return True
+#     except sqlite3.IntegrityError:
+#         # Fallo por repetición de clave primaria (timestamp)
+#         logger.warning(f"Error de integridad: Ya existe un registro para {data.get('timestamp', 'Desconocido')}.")
+#         return False
+#     except sqlite3.Error as e:
+#         logger.error(f"FALLO DE SQLITE: Error al insertar datos: {e}")
+#         return False
+#     finally:
+#         if conn:
+#             conn.close()
+
 def insert_rates(data):
     """Inserta una nueva fila de tasas en la tabla daily_rates, forzando los tipos."""
     conn = _connect_db()
     if conn is None:
         return False # Indica fallo de conexión
 
-    # Mapeo de columnas para asegurar el orden y la integridad (DEBE COINCIDIR con la tabla)
+    # Mapeo de columnas: ¡CORREGIDO! Incluye las dos nuevas columnas.
     columns = (
         'timestamp', 'date', 
         'USD_BCV', 'EUR_BCV', 
         'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
-        'USD_MERCADO_CRUDA'
+        'USD_MERCADO_CRUDA',
+        'EUR_USD_IMPLICITA',  # <--- CORREGIDO: AÑADIDA
+        'EUR_USD_FOREX'       # <--- CORREGIDO: AÑADIDA
     )
     
     # Lógica de robustez: Asegura que las tasas sean float o None
     values = []
-    # Definimos qué columnas deben ser números (REAL en SQL)
-    rate_columns = ['USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 'USD_MERCADO_CRUDA']
+    # Definimos qué columnas deben ser números (REAL en SQL): ¡CORREGIDO!
+    rate_columns = [
+        'USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
+        'USD_MERCADO_CRUDA',
+        'EUR_USD_IMPLICITA',  # <--- CORREGIDO: AÑADIDA
+        'EUR_USD_FOREX'       # <--- CORREGIDO: AÑADIDA
+    ]
     
     for col in columns:
         value = data.get(col)
@@ -103,7 +167,7 @@ def insert_rates(data):
     values = tuple(values)
 
     placeholders = ', '.join(['?'] * len(columns))
-    sql = f"INSERT INTO daily_rates ({', '.join(columns)}) VALUES ({placeholders})"
+    sql = f"INSERT INTO exchange_rates ({', '.join(columns)}) VALUES ({placeholders})"
 
     try:
         cursor = conn.cursor()
@@ -131,7 +195,7 @@ def get_latest_rates():
     try:
         cursor = conn.cursor()
         # Consulta SQL para seleccionar la fila con el ID más alto (el más reciente)
-        cursor.execute("SELECT * FROM daily_rates ORDER BY id DESC LIMIT 1")
+        cursor.execute("SELECT * FROM exchange_rates ORDER BY id DESC LIMIT 1")
         
         # Obtener los nombres de las columnas para crear un diccionario
         column_names = [description[0] for description in cursor.description]
