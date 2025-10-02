@@ -3,7 +3,7 @@
 import sqlite3
 import os
 import logging
-from datetime import datetime, timedelta # <--- CORREGIDO: Añadido timedelta
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -17,15 +17,16 @@ DB_FILE_PATH = os.path.join(DB_FOLDER_PATH, 'exchange_rates.db')
 def _connect_db():
     """Conecta o crea la base de datos SQLite."""
     try:
-        # La conexión creará el archivo DB si no existe (asumiendo que la carpeta sí existe)
         conn = sqlite3.connect(DB_FILE_PATH)
+        # Habilitar el acceso por nombre de columna (útil para el diccionario)
+        conn.row_factory = sqlite3.Row 
         return conn
     except sqlite3.Error as e:
         logger.error(f"Error al conectar con SQLite: {e}")
         return None
 
 def initialize_db():
-    """Asegura que el directorio exista y crea la tabla exchange_rates si no existe."""
+    """Asegura el directorio y crea las dos tablas: BCV_RATES y MARKET_RATES."""
     
     # 1. Crear el directorio 'data' si no existe
     if not os.path.exists(DB_FOLDER_PATH):
@@ -36,7 +37,7 @@ def initialize_db():
             logger.error(f"Error al crear el directorio de datos: {e}")
             return # Fallo crítico, detenemos la inicialización
             
-    # 2. Conectar y crear la tabla
+    # 2. Conectar y crear las tablas
     conn = _connect_db()
     if conn is None:
         return
@@ -44,127 +45,171 @@ def initialize_db():
     try:
         cursor = conn.cursor()
         
-        # Definición de la tabla (incluyendo todas las divisas)
+        # 🚨 NUEVA TABLA 1: TASAS OFICIALES BCV (datos estables)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS exchange_rates (
+            CREATE TABLE IF NOT EXISTS BCV_RATES (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                timestamp TEXT NOT NULL UNIQUE,
-                date TEXT NOT NULL,
+                date TEXT NOT NULL UNIQUE, -- Unique: solo una actualización por día
+                timestamp_saved TEXT NOT NULL,
                 USD_BCV REAL,
                 EUR_BCV REAL,
                 CNY_BCV REAL,
                 TRY_BCV REAL,
-                RUB_BCV REAL,
+                RUB_BCV REAL
+            )
+        """)
+        
+        # 🚨 NUEVA TABLA 2: TASAS DE MERCADO (datos volátiles)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS MARKET_RATES (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL UNIQUE, -- Único y más detallado
                 USD_MERCADO_CRUDA REAL,
-                EUR_USD_IMPLICITA REAL,
                 EUR_USD_FOREX REAL
             )
         """)
+        
         conn.commit()
-        logger.info("Base de datos SQLite inicializada y tabla 'exchange_rates' verificada.")
+        logger.info("Base de datos SQLite inicializada. Tablas BCV_RATES y MARKET_RATES creadas/verificadas.")
     except sqlite3.Error as e:
         logger.error(f"Error al inicializar la base de datos: {e}")
     finally:
         if conn:
             conn.close()
 
-def insert_rates(data):
-    """Inserta una nueva fila de tasas en la tabla exchange_rates, forzando los tipos."""
+# --- FUNCIONES DE GUARDADO ESPECÍFICAS ---
+
+def save_bcv_rates(data):
+    """Inserta las tasas BCV. Debe ser llamado solo si el 'date' ha cambiado."""
     conn = _connect_db()
     if conn is None:
-        return False # Indica fallo de conexión
+        return False
 
-    # Mapeo de columnas para asegurar el orden y la integridad
-    columns = (
-        'timestamp', 'date', 
-        'USD_BCV', 'EUR_BCV', 
-        'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
-        'USD_MERCADO_CRUDA',
-        'EUR_USD_IMPLICITA', 
-        'EUR_USD_FOREX'
-    )
-    
-    # Lógica de robustez: Asegura que las tasas sean float o None
-    values = []
-    rate_columns = [
-        'USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV', 
-        'USD_MERCADO_CRUDA',
-        'EUR_USD_IMPLICITA',
-        'EUR_USD_FOREX'
-    ]
-    
-    for col in columns:
-        value = data.get(col)
-        
-        if col in rate_columns:
-            # Intenta convertir a float. Si falla (ValueError) o es None, usa None.
-            try:
-                values.append(float(value) if value is not None else None)
-            except (ValueError, TypeError):
-                # Si el valor de la tasa no es un número válido, guarda None
-                values.append(None)
-        else:
-            # Para 'timestamp' y 'date' (TEXT), usa el valor original
-            values.append(value)
-            
-    values = tuple(values)
-
+    columns = ('date', 'timestamp_saved', 'USD_BCV', 'EUR_BCV', 'CNY_BCV', 'TRY_BCV', 'RUB_BCV')
     placeholders = ', '.join(['?'] * len(columns))
-    # NOTA: Asegúrate de usar el nombre de tabla correcto: 'exchange_rates'
-    sql = f"INSERT INTO exchange_rates ({', '.join(columns)}) VALUES ({placeholders})"
+    sql = f"INSERT INTO BCV_RATES ({', '.join(columns)}) VALUES ({placeholders})"
+    
+    # Prepara los valores, asegurando que el timestamp_saved sea el de ahora
+    values = (
+        data['date'], 
+        datetime.now().isoformat(),
+        data['USD_BCV'], data['EUR_BCV'], 
+        data['CNY_BCV'], data['TRY_BCV'], data['RUB_BCV']
+    )
 
     try:
         cursor = conn.cursor()
         cursor.execute(sql, values)
         conn.commit()
-        logger.info(f"Tasas insertadas en SQLite: {data.get('date', 'Desconocida')}")
+        logger.info(f"Tasas BCV guardadas para la fecha: {data['date']}")
         return True
     except sqlite3.IntegrityError:
-        # Fallo por repetición de clave primaria (timestamp)
-        logger.warning(f"Error de integridad: Ya existe un registro para {data.get('timestamp', 'Desconocido')}.")
+        logger.warning(f"Error de integridad: Ya existe un registro BCV para la fecha {data['date']}.")
         return False
     except sqlite3.Error as e:
-        logger.error(f"FALLO DE SQLITE: Error al insertar datos: {e}")
+        logger.error(f"FALLO DE SQLITE: Error al insertar tasas BCV: {e}")
         return False
     finally:
         if conn:
             conn.close()
-            
+
+def save_market_rates(data):
+    """Inserta las tasas de mercado y forex (volátiles)."""
+    conn = _connect_db()
+    if conn is None:
+        return False
+        
+    columns = ('timestamp', 'USD_MERCADO_CRUDA', 'EUR_USD_FOREX')
+    placeholders = ', '.join(['?'] * len(columns))
+    sql = f"INSERT INTO MARKET_RATES ({', '.join(columns)}) VALUES ({placeholders})"
+
+    values = (
+        data['timestamp'], 
+        data['USD_MERCADO_CRUDA'], 
+        data['EUR_USD_FOREX']
+    )
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute(sql, values)
+        conn.commit()
+        logger.info(f"Tasa de Mercado guardada: {data['USD_MERCADO_CRUDA']:.4f}")
+        return True
+    except sqlite3.IntegrityError:
+        logger.warning(f"Error de integridad: Ya existe un registro de mercado para el timestamp {data['timestamp']}.")
+        return False
+    except sqlite3.Error as e:
+        logger.error(f"FALLO DE SQLITE: Error al insertar tasas de Mercado: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+
+# Función antigua renombrada y modificada para el nuevo modelo
+def insert_rates(data):
+    """
+    Función de utilidad (manteniendo la interfaz antigua): 
+    Debe ser llamada por data_fetcher para guardar ambos tipos de tasas.
+    Nota: En el nuevo modelo, data_fetcher.py debería llamar a save_bcv_rates y save_market_rates por separado.
+    """
+    logger.warning("ATENCIÓN: insert_rates es obsoleto. Usar save_bcv_rates y save_market_rates.")
+    # Intenta guardar el mercado (más frecuente)
+    market_success = save_market_rates(data)
+    # Intenta guardar BCV (menos frecuente, se confía en la lógica de data_fetcher para la unicidad de 'date')
+    bcv_success = save_bcv_rates(data) 
+    return market_success or bcv_success
+
+# --- FUNCIÓN DE LECTURA COMBINADA ---
+
 def get_latest_rates():
-    """Obtiene el registro más reciente de tasas de la base de datos."""
+    """Obtiene el último registro de BCV_RATES y el último de MARKET_RATES y los combina."""
     conn = _connect_db()
     if conn is None:
         return None
 
     try:
+        # 1. Obtener la última fila de BCV
         cursor = conn.cursor()
-        # Consulta SQL para seleccionar la fila con el ID más alto (el más reciente)
-        cursor.execute("SELECT * FROM exchange_rates ORDER BY id DESC LIMIT 1")
+        cursor.execute("SELECT * FROM BCV_RATES ORDER BY id DESC LIMIT 1")
+        bcv_row = cursor.fetchone()
         
-        # Obtener los nombres de las columnas para crear un diccionario
-        column_names = [description[0] for description in cursor.description]
+        # 2. Obtener la última fila de Mercado
+        cursor.execute("SELECT * FROM MARKET_RATES ORDER BY id DESC LIMIT 1")
+        market_row = cursor.fetchone()
+
+        latest_rates = {}
         
-        # Obtener el resultado
-        latest_row = cursor.fetchone()
+        if bcv_row:
+            # Combina columnas y valores de BCV
+            latest_rates.update(dict(bcv_row))
         
-        if latest_row:
-            # Combinar nombres de columnas y valores en un diccionario
-            latest_rates = dict(zip(column_names, latest_row))
-            return latest_rates
-        else:
+        if market_row:
+            # Combina columnas y valores de Mercado, sobrescribiendo si hay colisión (no debería)
+            latest_rates.update(dict(market_row))
+        
+        if not latest_rates:
             return None
+
+        # Arreglo de tipos: Convertir los valores a float si son números
+        for key, value in latest_rates.items():
+            if isinstance(value, (int, float)):
+                latest_rates[key] = float(value)
+        
+        return latest_rates
             
     except sqlite3.Error as e:
-        logger.error(f"Error al obtener las últimas tasas de SQLite: {e}")
+        logger.error(f"Error al obtener las últimas tasas combinadas de SQLite: {e}")
         return None
     finally:
         if conn:
             conn.close()
 
+# --- FUNCIÓN DE RESUMEN DE 24H (ADAPTADA) ---
+
 def get_24h_market_summary():
     """
     Calcula la tasa Máxima, Mínima y Promedio de USD_MERCADO_CRUDA
-    para los registros dentro de las últimas 24 horas.
+    para los registros de MARKET_RATES dentro de las últimas 24 horas.
     """
     conn = _connect_db()
     if conn is None:
@@ -177,26 +222,26 @@ def get_24h_market_summary():
         time_24h_ago = datetime.now() - timedelta(hours=24)
         time_limit_iso = time_24h_ago.isoformat()
         
-        # 2. Consulta SQL para la agregación
+        # 2. Consulta SQL adaptada a la nueva tabla MARKET_RATES
         cursor.execute("""
             SELECT 
                 MAX(USD_MERCADO_CRUDA) AS Max_Tasa,
                 MIN(USD_MERCADO_CRUDA) AS Min_Tasa,
                 AVG(USD_MERCADO_CRUDA) AS Avg_Tasa,
                 COUNT(id) AS Total_Registros
-            FROM exchange_rates 
+            FROM MARKET_RATES 
             WHERE timestamp >= ?
         """, (time_limit_iso,))
         
         summary_row = cursor.fetchone()
 
-        if summary_row and summary_row[0] is not None:
-            # Mapear la tupla de resultados a un diccionario
+        if summary_row and summary_row['Max_Tasa'] is not None:
+            # Mapear la tupla de resultados a un diccionario (funciona gracias a row_factory)
             return {
-                'max': summary_row[0],
-                'min': summary_row[1],
-                'avg': summary_row[2],
-                'count': summary_row[3],
+                'max': summary_row['Max_Tasa'],
+                'min': summary_row['Min_Tasa'],
+                'avg': summary_row['Avg_Tasa'],
+                'count': summary_row['Total_Registros'],
                 'period': 'Últimas 24h'
             }
         else:
@@ -209,5 +254,5 @@ def get_24h_market_summary():
         if conn:
             conn.close()
 
-# Inicializa la base de datos al importar el módulo (opcional, pero útil)
+# Inicializa la base de datos al importar el módulo
 initialize_db()

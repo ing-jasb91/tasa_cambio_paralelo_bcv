@@ -4,8 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from dateutil import parser 
-from src.database_manager import insert_rates
-# Debes importar la función del mercado P2P (asumo que está en src/market_fetcher.py)
+# 🚨 CAMBIO 1: Importamos las nuevas funciones específicas de la DB y la de lectura
+from src.database_manager import save_bcv_rates, save_market_rates, get_latest_rates 
 from src.market_fetcher import fetch_binance_p2p_rate 
 from datetime import datetime
 import logging
@@ -27,7 +27,7 @@ ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV"
 
 FOREX_URL = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=USD&apikey={ALPHA_VANTAGE_API_KEY}"
 
-# --- Funciones de Web Scraping y Auxiliares (COMPLETADAS) ---
+# --- Funciones de Web Scraping y Auxiliares (SE MANTIENEN IGUAL) ---
 
 def _extract_rate_by_id(soup, currency_id, currency_code):
     """Extrae la tasa de una divisa usando su ID de contenedor único."""
@@ -54,6 +54,7 @@ def _scrape_bcv_rates():
     
     try:
         headers = {'User-Agent': 'Mozilla/5.0'}
+        # 🚨 NOTA: Asegúrate de que BCV_URL esté definido
         response = requests.get(BCV_URL, headers=headers, verify=False) 
         response.raise_for_status() 
         logger.info(f"Conexión exitosa con el BCV (Status: {response.status_code}). Procediendo a extraer datos.")
@@ -90,15 +91,11 @@ def _scrape_bcv_rates():
 def _convert_date_format(date_string):
     """Convierte la fecha extraída ('Martes, 30 Septiembre 2025') a 'DD/MM/YYYY' usando dateutil."""
     try:
-        # Eliminar el día de la semana para simplificar y asegurar que dateutil lo reconozca
-        # Busca "30 Septiembre 2025" o similar
         match = re.search(r'(\d{1,2}\s\w+\s\d{4})', date_string) 
         if not match:
             return None
         
         date_part = match.group(1).strip()
-        
-        # Parsea la cadena y la convierte a objeto datetime
         fecha_obj = parser.parse(date_part) 
         
         # Formateamos al formato final DD/MM/AAAA
@@ -108,22 +105,21 @@ def _convert_date_format(date_string):
         logger.error(f"Error al parsear la fecha con dateutil: {e}")
         return None
     
-
-# --- Función de Tasa de Mercado Temporal (AHORA USARÁS LA REAL) ---
 def _get_mercado_rate():
     """
-    Función que envuelve la llamada a la tasa P2P. Se mantiene por consistencia
-    con el nombre anterior de la función temporal.
+    Función que envuelve la llamada a la tasa P2P. 
     """
+    # 🚨 NOTA: fetch_binance_p2p_rate debe devolver float, o 0.0 si falla.
     return fetch_binance_p2p_rate() 
     
-# --- Función de Fetch de FOREX (CON CORRECCIÓN DE KEY) ---
 def fetch_forex_eur_usd_rate():
     """
     Obtiene la tasa EUR/USD del mercado Forex usando la API gratuita de Alpha Vantage.
+    (Se mantiene igual)
     """
     try:
         logger.info("Conectando con Alpha Vantage para obtener la tasa EUR/USD del mercado...")
+        # 🚨 NOTA: Asegúrate de que FOREX_URL esté definido
         response = requests.get(FOREX_URL, timeout=8)
         response.raise_for_status()
         data = response.json()
@@ -148,67 +144,94 @@ def fetch_forex_eur_usd_rate():
         return 0.0
 
 
-# --- Función Principal para Obtener y Guardar Tasas (CORREGIDA para manejar None) ---
+# --- Función Principal para Obtener y Guardar Tasas (ADAPTADA AL NUEVO MODELO) ---
 
-def get_exchange_rates():
+def get_exchange_rates(force_save=False):
     """
-    Función principal para obtener todas las tasas de cambio requeridas,
-    redondearlas y guardarlas.
+    Función principal para obtener todas las tasas, aplicar lógica condicional de guardado 
+    (separada para BCV y Mercado) y retornar las tasas principales.
     """
     
-    # 1. Obtención de datos
+    # 1. Obtención de datos externos
     scraped_data = _scrape_bcv_rates()
-    # TRUCO PARA EVITAR ATTRIBUTEERROR: Si el scrapeo falla, usamos un diccionario vacío
     if scraped_data is None:
         scraped_data = {} 
-        logger.warning("BCV Scraper devolvió None. Usando un diccionario vacío para los datos del BCV.")
 
     tasa_mercado_cruda = _get_mercado_rate()
-    tasa_bcv_usd = scraped_data.get('USD_BCV')
-    tasa_bcv_eur = scraped_data.get('EUR_BCV')
-    date_info_raw = scraped_data.get('Fecha') 
-
     tasa_forex_eur_usd = fetch_forex_eur_usd_rate()
     
-    # ----------------------------------------------------
-    # CÁLCULO DE LA TASA IMPLÍCITA
-    # ----------------------------------------------------
-    bcv_eur_usd_implicita = 0.0
-    if isinstance(tasa_bcv_usd, (int, float)) and isinstance(tasa_bcv_eur, (int, float)) and tasa_bcv_usd > 0:
-        bcv_eur_usd_implicita = tasa_bcv_eur / tasa_bcv_usd
-        
-    date_info_clean = _convert_date_format(date_info_raw)
+    tasa_bcv_usd = scraped_data.get('USD_BCV')
+    date_info_raw = scraped_data.get('Fecha') 
     
     # Verificación crítica: Fallo si no tenemos los datos principales
     if not (tasa_bcv_usd and tasa_mercado_cruda):
         logger.error("Fallo la obtención de tasas críticas (USD BCV o USD Mercado). Retornando None.")
         return None, None, None
 
-    tasa_mercado_redondeada = round(tasa_mercado_cruda, 0) # Redondeamos al entero más cercano
-    
-    # ----------------------------------------------------
-    # ASIGNACIÓN FINAL PARA LA BASE DE DATOS
-    # ----------------------------------------------------
+    # 2. Procesamiento de datos
+    tasa_bcv_eur = scraped_data.get('EUR_BCV')
+    bcv_eur_usd_implicita = 0.0
+    if isinstance(tasa_bcv_usd, (int, float)) and isinstance(tasa_bcv_eur, (int, float)) and tasa_bcv_usd > 0:
+        bcv_eur_usd_implicita = tasa_bcv_eur / tasa_bcv_usd
+        
+    date_info_clean = _convert_date_format(date_info_raw)
+    tasa_mercado_redondeada = round(tasa_mercado_cruda, 0)
     now = datetime.now()
-    data_to_save = {
-        'timestamp': now.isoformat(),
-        'date': date_info_clean if date_info_clean else now.strftime("%d/%m/%Y"),
-        'USD_BCV': tasa_bcv_usd,
-        'EUR_BCV': tasa_bcv_eur, 
-        'CNY_BCV': scraped_data.get('CNY_BCV'),
-        'TRY_BCV': scraped_data.get('TRY_BCV'),
-        'RUB_BCV': scraped_data.get('RUB_BCV'), 
-        'USD_MERCADO_CRUDA': tasa_mercado_cruda,
-        'EUR_USD_IMPLICITA': bcv_eur_usd_implicita,
-        'EUR_USD_FOREX': tasa_forex_eur_usd,
-    }
+    now_iso = now.isoformat()
+    current_date_str = date_info_clean if date_info_clean else now.strftime("%d/%m/%Y")
+
+    # 3. Datos de la DB para la lógica condicional
+    latest_data = get_latest_rates()
+    latest_db_date = latest_data.get('date', '') if latest_data else ''
+    latest_db_market_rate = latest_data.get('USD_MERCADO_CRUDA') if latest_data else None
+
+    # ----------------------------------------------------
+    # 4. LÓGICA DE GUARDADO CONDICIONAL
+    # ----------------------------------------------------
     
-    insertion_success = insert_rates(data_to_save) # Guardar en SQLite
-    
-    if insertion_success:
-        logger.info(f"Registro de tasas guardado en DB para la fecha {data_to_save['date']}.")
+    bcv_saved = False
+    market_saved = False
+
+    # A) Lógica BCV: Guardar solo si la fecha del BCV ha cambiado
+    if current_date_str != latest_db_date:
+        bcv_data_to_save = {
+            'date': current_date_str,
+            'USD_BCV': tasa_bcv_usd,
+            'EUR_BCV': tasa_bcv_eur, 
+            'CNY_BCV': scraped_data.get('CNY_BCV'),
+            'TRY_BCV': scraped_data.get('TRY_BCV'),
+            'RUB_BCV': scraped_data.get('RUB_BCV'), 
+        }
+        bcv_saved = save_bcv_rates(bcv_data_to_save)
     else:
-        logger.error("FALLO CRÍTICO: No se pudo insertar el registro en la base de datos SQLite.")
+        logger.info(f"Fecha BCV ({current_date_str}) no ha cambiado. Omitiendo inserción en BCV_RATES.")
+
+    # B) Lógica de Mercado: Guardar si hay volatilidad O si se fuerza (para el reporte horario)
+    
+    # Calcular volatilidad
+    if latest_db_market_rate is not None and latest_db_market_rate > 0:
+        market_rate_change_percent = abs((tasa_mercado_cruda - latest_db_market_rate) / latest_db_market_rate)
+    else:
+        market_rate_change_percent = 1.0 # 100% de cambio si no hay datos previos (fuerza el primer guardado)
+        
+    if force_save or market_rate_change_percent > 0.001: # Umbral de 0.1%
+        market_data_to_save = {
+            'timestamp': now_iso,
+            'USD_MERCADO_CRUDA': tasa_mercado_cruda,
+            'EUR_USD_FOREX': tasa_forex_eur_usd,
+        }
+        market_saved = save_market_rates(market_data_to_save)
+        
+    else:
+        logger.info(f"Volatilidad ({market_rate_change_percent*100:.3f}%) no supera el 0.1%. Omitiendo inserción en MARKET_RATES.")
+
+    
+    if bcv_saved or market_saved:
+        logger.info(f"Proceso de guardado completado. BCV: {bcv_saved}, Mercado: {market_saved}.")
+    elif not latest_data and not (bcv_saved or market_saved):
+        logger.error("FALLO CRÍTICO: No se pudo insertar el registro inicial en la base de datos.")
 
 
+    # 5. Retorno de las tasas principales
+    # Retornamos los valores recién obtenidos para usarlos inmediatamente en el bot si es necesario
     return tasa_bcv_usd, tasa_mercado_cruda, tasa_mercado_redondeada
