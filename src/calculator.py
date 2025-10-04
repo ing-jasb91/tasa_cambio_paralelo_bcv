@@ -1,226 +1,246 @@
 # src/calculator.py
-
-# Importamos SOLO lo que necesitamos de la DB
+import logging
 from src.database_manager import get_latest_rates 
 
-class DivisaCalculator:
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# --- FUNCIÓN AUXILIAR DE FORMATO (SE MANTIENE IGUAL) ---
+def format_currency(amount, decimals=2):
+    """
+    Formatea el monto con separador de miles (punto) y decimales (coma)
+    para el formato de Venezuela.
+    """
+    if amount is None or amount == 0:
+        return "0,00" if decimals > 0 else "0"
+    
+    # Formato: X.XXX,XX
+    return f"{amount:,.{decimals}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+class ExchangeRateCalculator:
+    # (El método __init__, _set_rates, is_valid y _get_currency_rates se mantienen iguales)
     def __init__(self):
-        # 1. Obtener los datos del último registro de la base de datos
-        latest_rates = get_latest_rates()
-        
-        if not latest_rates:
-            # Si no hay datos, inicializamos con None o 0 para evitar fallos
-            self.tasa_bcv = None
-            self.tasa_mercado_cruda = None
-            self.tasa_mercado_redondeada = None
-            return 
+        self.latest_rates = get_latest_rates()
+        self.valid = False 
+        self._set_rates()
+
+    def _set_rates(self):
+        """Carga y calcula todas las tasas necesarias desde el último registro de la DB."""
+        if not self.latest_rates:
+            logger.warning("No se encontraron tasas en la DB.")
+            return
             
-        # 2. Asignar las tasas desde el diccionario de la DB
-        self.tasa_bcv = latest_rates.get('USD_BCV')
-        self.tasa_mercado_cruda = latest_rates.get('USD_MERCADO_CRUDA')
-        
-        # 3. Calcular o obtener la tasa redondeada (si no está ya en la DB)
-        if self.tasa_mercado_cruda:
-            # Recalculamos la redondeada por si acaso (ajusta el redondeo según tu lógica)
-            self.tasa_mercado_redondeada = round(self.tasa_mercado_cruda, -1) 
+        self.USD_BCV = float(self.latest_rates.get('USD_BCV', 0.0))
+        self.USD_MERCADO_CRUDA = float(self.latest_rates.get('USD_MERCADO_CRUDA', 0.0))
+        self.EUR_BCV = float(self.latest_rates.get('EUR_BCV', 0.0))
+        self.EUR_USD_FOREX = float(self.latest_rates.get('EUR_USD_FOREX', 0.0))
+
+        if self.USD_BCV > 0.0 and self.USD_MERCADO_CRUDA > 0.0 and self.EUR_USD_FOREX > 0.0:
+            self.valid = True
+            self.USD_MERCADO_REDONDEADA = round(self.USD_MERCADO_CRUDA, -1)
+            self.EUR_MERCADO_CRUDA = self.USD_MERCADO_CRUDA * self.EUR_USD_FOREX
+            self.EUR_MERCADO_REDONDEADA = round(self.EUR_MERCADO_CRUDA, -1)
         else:
-            self.tasa_mercado_redondeada = None
-            
-        # Verificación final de tasas críticas
-        if not all([self.tasa_bcv, self.tasa_mercado_cruda, self.tasa_mercado_redondeada]):
-             print("Advertencia: Se obtuvieron datos de la DB, pero faltan tasas críticas (USD/Mercado).")
-            
+            logger.warning("Faltan tasas críticas (BCV USD o Mercado USD o Forex EUR/USD). Cálculos deshabilitados.")
+
     def is_valid(self):
         """Verifica si la calculadora se inicializó con tasas válidas."""
-        return all([self.tasa_bcv, self.tasa_mercado_cruda, self.tasa_mercado_redondeada])
+        return self.valid
 
-    def get_exchange_rates_report(self):
-        """Genera un reporte completo de las tasas de cambio."""
+    def _get_currency_rates(self, currency):
+        """Devuelve las tasas requeridas (BCV, Mercado Cruda, Mercado Redondeada) para la divisa solicitada."""
+        if currency.upper() == 'USD':
+            return self.USD_BCV, self.USD_MERCADO_CRUDA, self.USD_MERCADO_REDONDEADA, 'USD', '🇺🇸'
+        elif currency.upper() == 'EUR':
+            return self.EUR_BCV, self.EUR_MERCADO_CRUDA, self.EUR_MERCADO_REDONDEADA, 'EUR', '🇪🇺'
+        else:
+            return None, None, None, None, None
+
+    # ----------------------------------------------------------------------
+    # 1. ANÁLISIS DE COMPRA (Se mantiene igual)
+    # ----------------------------------------------------------------------
+    def analyze_purchase(self, cost_amount, available_amount, currency='USD'):
+        """
+        Calcula el poder de compra para una divisa específica (USD o EUR) con formato estético.
+        """
+        tasa_bcv, _, tasa_mercado_redondeada, code, emoji = self._get_currency_rates(currency)
+        if not tasa_bcv or not tasa_mercado_redondeada:
+            return f"❌ No hay tasas válidas para {code}.", tasa_mercado_redondeada
+
+        tasas_a_evaluar = [tasa_mercado_redondeada + 10] + [tasa_mercado_redondeada - (i * 10) for i in range(0, 6)]
+        tasas_a_evaluar = sorted(list(set(tasas_a_evaluar)), reverse=True)
         
+        # CONSTRUCCIÓN DEL REPORTE
+        reporte = (
+            f"🛒 *Análisis de Poder de Compra ({emoji} {code})*\n"
+            f"💰 *Precio Producto:* {format_currency(cost_amount)} {code}\n"
+            f"💵 *Capital Disponible:* {format_currency(available_amount)} {code}\n"
+            f"_(Tasa BCV Referencial: {format_currency(tasa_bcv, decimals=4)} Bs)_\n\n"
+            f"--- *Escenarios de Tasa* ---\n"
+        )
+        
+        for tasa in tasas_a_evaluar:
+            poder_compra = available_amount * (tasa / tasa_bcv)
+            
+            suficiente = poder_compra >= cost_amount
+            diferencia = poder_compra - cost_amount
+            
+            icono_tasa = "🎯" if abs(tasa - tasa_mercado_redondeada) < 0.01 else "📊"
+            icono_resultado = "🟢" if suficiente else "🔴"
+            
+            reporte += (
+                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs*\n"
+                f"   • Poder de Compra: *{format_currency(poder_compra, decimals=2)} {code}*\n"
+                f"   • Resultado Neto: {icono_resultado} *{format_currency(abs(diferencia))}* {code}\n"
+            )
+
+        # PIE DE PÁGINA
+        reporte += (
+            f"\n═════════════════════\n"
+            f"🎯 Tasa Redondeada de Referencia."
+        )
+        
+        return reporte, tasa_mercado_redondeada
+
+    # ----------------------------------------------------------------------
+    # 2. CONVERSIÓN DE DIVISAS (Precio en Bs) (¡IGTF ELIMINADO!)
+    # ----------------------------------------------------------------------
+    def convert_price(self, price_amount, currency='USD'):
+        """Convierte un precio de USD/EUR a Bolívares, sin considerar el IGTF."""
+        tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada, code, emoji = self._get_currency_rates(currency)
+        if not tasa_bcv or not tasa_mercado_cruda:
+            return f"❌ No hay tasas válidas para {code}.", tasa_mercado_redondeada
+
+        # Lógica de IGTF eliminada según solicitud.
+        
+        precio_bcv = price_amount * tasa_bcv
+        precio_mercado = price_amount * tasa_mercado_cruda # Cálculo con Tasa Cruda de Mercado
+        
+        diferencia_cifras = tasa_mercado_cruda - tasa_bcv
+        diferencia_porcentaje = (diferencia_cifras / tasa_bcv) * 100
+        diferencia_total_bs = precio_mercado - precio_bcv 
+
+        # 1. ENCABEZADO Y RESUMEN PRINCIPAL
+        reporte = (
+            f"💱 *Conversión de Precios ({emoji} {code})*\n"
+            f"Monto Base: *{format_currency(price_amount)} {code}*\n\n"
+            f"--- *Tasas Clave (Bs/{code})* ---\n"
+            f"🏦 BCV: *{format_currency(tasa_bcv, decimals=4)}*\n"
+            f"💸 Mercado (Cruda): *{format_currency(tasa_mercado_cruda, decimals=4)}*\n"
+            f" _(Brecha vs BCV: {format_currency(diferencia_cifras, decimals=4)} Bs | `{diferencia_porcentaje:.2f}%`)_\n\n"
+            f"--- *Resultado Final (Precio en Bs)* ---\n"
+            f"Precio BCV: {format_currency(precio_bcv)}\n"
+            f"Precio Mercado (Puro): *{format_currency(precio_mercado)}*\n"
+            f"Diferencia total: {format_currency(diferencia_total_bs)} Bs\n\n"
+            f"--- *Precios por Rango de Tasas* ---\n"
+        )
+
+        tasas_a_evaluar = [tasa_mercado_redondeada + 10] + [tasa_mercado_redondeada - (i * 10) for i in range(0, 6)]
+        tasas_a_evaluar = sorted(list(set(tasas_a_evaluar)), reverse=True)
+        
+        for tasa in tasas_a_evaluar:
+            precio_rango = price_amount * tasa
+            diferencia_precio = precio_rango - precio_bcv 
+            
+            icono_tasa = "🎯" if abs(tasa - tasa_mercado_redondeada) < 0.01 else "💰"
+            
+            reporte += (
+                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs*\n"
+                f"   • Precio Final: *{format_currency(precio_rango)} Bs*\n"
+                f"   • Margen vs BCV: +{format_currency(diferencia_precio)} Bs\n"
+            )
+        
+        return reporte, tasa_mercado_redondeada
+
+
+    # ----------------------------------------------------------------------
+    # 3. COSTO DE OPORTUNIDAD (Se mantiene igual)
+    # ----------------------------------------------------------------------
+    def analyze_opportunity_cost(self, sell_amount, currency='USD'):
+        """
+        Calcula el costo de oportunidad (pérdida) de vender una divisa por debajo
+        de la tasa de mercado redondeada (mejor precio), con formato estético.
+        """
+        tasa_bcv, _, tasa_mercado_redondeada, code, emoji = self._get_currency_rates(currency)
+        if not tasa_bcv or not tasa_mercado_redondeada:
+            return f"❌ No hay tasas válidas para {code}.", tasa_mercado_redondeada
+
+        tasas_a_evaluar = [tasa_mercado_redondeada + 10] + [tasa_mercado_redondeada - (i * 10) for i in range(0, 6)]
+        tasas_a_evaluar = sorted(list(set(tasas_a_evaluar)), reverse=True)
+        
+        valor_max_bolivares = sell_amount * tasa_mercado_redondeada
+        
+        # CONSTRUCCIÓN DEL REPORTE
+        reporte = (
+            f"💸 *Costo de Oportunidad ({emoji} {code})*\n"
+            f"Monto a Vender: *{format_currency(sell_amount)} {code}*\n"
+            f"_(Tasa Referencial: *{format_currency(tasa_mercado_redondeada, decimals=2)} Bs*)_\n\n"
+            f"--- *Pérdida por Tasa de Venta* ---\n"
+        )
+        
+        for tasa_actual in tasas_a_evaluar:
+            valor_actual_bolivares = sell_amount * tasa_actual
+            perdida_bolivares = valor_max_bolivares - valor_actual_bolivares
+            
+            perdida_divisa = perdida_bolivares / tasa_mercado_redondeada 
+            iac_porcentaje = (1 - (tasa_actual / tasa_mercado_redondeada)) * 100
+            
+            # Lógica de íconos y formato
+            if abs(tasa_actual - tasa_mercado_redondeada) < 0.01:
+                icono = "👑" # Tasa ideal
+                perdida_bs_str = "*0,00 Bs*"
+                perdida_code_str = "0,00"
+                iac_str = "`0.00%`"
+            elif tasa_actual > tasa_mercado_redondeada:
+                icono = "🎁" # Ganancia (vendiendo más caro que el referencial)
+                perdida_bs_str = f"*+{format_currency(perdida_bolivares * -1, decimals=2)} Bs*" # Mostrar positivo
+                perdida_code_str = f"+{format_currency(perdida_divisa * -1, decimals=2)}"
+                iac_str = f"`{iac_porcentaje:.2f}%`"
+            else:
+                icono = "💔" # Pérdida
+                perdida_bs_str = f"*{format_currency(perdida_bolivares, decimals=2)} Bs*"
+                perdida_code_str = format_currency(perdida_divisa, decimals=2)
+                iac_str = f"`{iac_porcentaje:.2f}%`"
+            
+            reporte += (
+                f"\n{icono} Tasa: *{format_currency(tasa_actual, decimals=2)} Bs*\n"
+                f"   • Pérdida Neta (Bs): {perdida_bs_str}\n"
+                f"   • Pérdida en {code}: {perdida_code_str} {code}\n"
+                f"   • IAC (Aceptación de Costo): {iac_str}\n"
+            )
+
+        # PIE DE PÁGINA
+        reporte += (
+            f"\n═════════════════════\n"
+            f"💔 Pérdida por negociar bajo el referencial.\n"
+            f"👑 Tasa de Referencia de Venta."
+        )
+        
+        return reporte, tasa_mercado_redondeada
+
+    # ----------------------------------------------------------------------
+    # 4. REPORTE GENERAL (Se mantiene igual)
+    # ----------------------------------------------------------------------
+    def get_exchange_rates_report(self):
+        """Genera un reporte completo de las tasas de cambio (principalmente USD)."""
         if not self.is_valid():
             return "❌ No se pudieron obtener las tasas de cambio desde la base de datos."
             
-        # Diferencia cambiaria en cifras
-        diferencia_cifras = self.tasa_mercado_cruda - self.tasa_bcv
-        
-        # Diferencia cambiaria en porcentaje
-        diferencia_porcentaje = (diferencia_cifras / self.tasa_bcv) * 100
-        
-        # IAC (Índice de Ahorro para el Comprador)
-        iac = ((self.tasa_mercado_cruda / self.tasa_bcv) - 1) * 100
-        
-        # FPC (Factor de Poder de Compra)
-        fpc = self.tasa_mercado_cruda / self.tasa_bcv
+        tasa_bcv = self.USD_BCV
+        tasa_mercado_cruda = self.USD_MERCADO_CRUDA
 
+        diferencia_cifras = tasa_mercado_cruda - tasa_bcv
+        diferencia_porcentaje = (diferencia_cifras / tasa_bcv) * 100
+        
         reporte = (
             f"📊 *Reporte de Tasas de Cambio*\n\n"
-            f"Tasa Oficial (BCV): {self.tasa_bcv:.4f} Bs/USD\n"
-            f"Tasa Mercado (Cruda): {self.tasa_mercado_cruda:.4f} Bs/USD\n"
-            f"Tasa Mercado (Redondeada): {self.tasa_mercado_redondeada:.4f} Bs/USD\n\n"
-            f"Diferencia Cambiaria: {diferencia_cifras:.4f} Bs/USD ({diferencia_porcentaje:.2f}%)\n"
-            f"IAC (%): {iac:.2f}%\n"
-            f"FPC: {fpc:.4f}\n"
+            f"Tasa Oficial (BCV): {format_currency(tasa_bcv, decimals=4)} Bs/USD\n"
+            f"Tasa Mercado (Cruda): {format_currency(tasa_mercado_cruda, decimals=4)} Bs/USD\n"
+            f"Tasa Mercado (Redondeada): {format_currency(self.USD_MERCADO_REDONDEADA, decimals=4)} Bs/USD\n\n"
+            f"Diferencia Cambiaria: {format_currency(diferencia_cifras, decimals=4)} Bs/USD ({diferencia_porcentaje:.2f}%)\n"
         )
         return reporte
-
-    def display_current_rates(self):
-        # Esta función ahora será llamada por el nuevo método
-        print(self.get_exchange_rates_report())
-        
-    # def run_analysis_de_compra(self, costo_producto: float, dolares_disponibles: float):
-    #     """
-    #     Calcula el análisis de compra en un rango de tasas.
-    #     Adaptado para ser llamado directamente desde el bot (sin input()).
-    #     """
-    #     if not self.is_valid():
-    #         return "❌ No se pudieron obtener las tasas de cambio para el análisis."
-            
-    #     tasas_a_evaluar = [self.tasa_mercado_redondeada - (i * 10) for i in range(6)]
-        
-    #     # Reemplaza la impresión de la consola con la generación de una cadena para el bot
-    #     reporte_str = (
-    #         f"\n💰 Análisis de Compra\n"
-    #         f"Producto: ${costo_producto:.2f} | Divisas disponibles: ${dolares_disponibles:.2f}\n"
-    #         f"===================================\n"
-    #         f"{'Tasa':<12} | {'Poder Compra':<15} | {'Resultado':<20}\n"
-    #         f"-----------------------------------\n"
-    #     )
-        
-    #     for tasa in tasas_a_evaluar:
-    #         poder_compra = dolares_disponibles * (tasa / self.tasa_bcv)
-    #         suficiente = poder_compra >= costo_producto
-    #         diferencia = poder_compra - costo_producto
-
-    #         estado = f"Sí (+${diferencia:.2f})" if suficiente else f"No (-${abs(diferencia):.2f})"
-            
-    #         reporte_str += f"{tasa:<12.4f} | {poder_compra:<15.4f} | {estado:<20}\n"
-            
-    #     reporte_str += "===================================\n"
-    #     return reporte_str
-
-# src/calculator.py (dentro de la clase DivisaCalculator)
-
-    def run_analysis_de_compra(self):
-        if not self.is_valid():
-            print("❌ No se pudieron obtener las tasas de cambio para el análisis.")
-            return
-
-        try:
-            # Revertir al uso de input()
-            costo_producto = float(input("\nIngresa el costo del producto en USD: "))
-            dolares_disponibles = float(input("Ingresa la cantidad de divisas que tienes en USD: "))
-        except ValueError:
-            print("Por favor, ingresa un número válido.")
-            return
-
-        tasas_a_evaluar = [self.tasa_mercado_redondeada - (i * 10) for i in range(6)]
-        
-        # ... (Mantener la lógica de impresión de consola de tu código original) ...
-
-        print("\n" + "=" * 115)
-        print(f"Análisis de Compra | Producto: ${costo_producto:.2f} | Divisas: ${dolares_disponibles:.2f}")
-        print("=" * 115)
-        print("{:<12} | {:<8} | {:<8} | {:<18} | {:<18} | {:<25}".format(
-            "Tasa", "IAC (%)", "FPC", "Poder de Compra", "Monto Exacto", "Resultado"
-        ))
-        print("-" * 115)
-
-        for tasa in tasas_a_evaluar:
-            poder_compra = dolares_disponibles * (tasa / self.tasa_bcv)
-            suficiente = poder_compra >= costo_producto
-            diferencia = poder_compra - costo_producto
-
-            IAC = ((tasa / self.tasa_bcv) - 1) * 100
-            FPC = tasa / self.tasa_bcv
-            monto_exacto = costo_producto * (self.tasa_bcv / tasa)
-
-            estado = "Sí (Sobra: ${:.4f})".format(diferencia) if suficiente else "No (Falta: ${:.4f})".format(abs(diferencia))
-
-            print("{:<12.4f} | {:<8.4f} | {:<8.4f} | {:<18.4f} | {:<18.4f} | {:<25}".format(
-                tasa,
-                IAC,
-                FPC,
-                poder_compra,
-                monto_exacto,
-                estado
-            ))
-        print("=" * 115)
-
-
-    # def run_costo_de_oportunidad(self, dolares_a_evaluar: float):
-    #     """
-    #     Calcula el costo de oportunidad.
-    #     Adaptado para ser llamado directamente desde el bot (sin input()).
-    #     """
-    #     if not self.is_valid():
-    #         return "❌ No se pudieron obtener las tasas de cambio para el análisis."
-            
-    #     tasas_a_evaluar = [self.tasa_mercado_redondeada - (i * 10) for i in range(1, 6)]
-        
-    #     valor_max_bolivares = dolares_a_evaluar * self.tasa_mercado_redondeada
-
-    #     # Reemplaza la impresión de la consola con la generación de una cadena para el bot
-    #     reporte_str = (
-    #         f"\n💸 Costo de Oportunidad\n"
-    #         f"Divisas: ${dolares_a_evaluar:.2f}\n"
-    #         f"===================================\n"
-    #         f"{'Tasa':<10} | {'Pérdida (Bs)':<15} | {'Pérdida ($Merc.)':<15}\n"
-    #         f"-----------------------------------\n"
-    #     )
-        
-    #     for tasa_actual in tasas_a_evaluar:
-    #         valor_actual_bolivares = dolares_a_evaluar * tasa_actual
-    #         perdida_bolivares = valor_max_bolivares - valor_actual_bolivares
-    #         perdida_usd_mercado = perdida_bolivares / self.tasa_mercado_redondeada
-
-    #         reporte_str += f"{tasa_actual:<10.2f} | {perdida_bolivares:<15.2f} | {perdida_usd_mercado:<15.2f}\n"
-
-    #     reporte_str += "===================================\n"
-    #     return reporte_str
     
-    # src/calculator.py (dentro de la clase DivisaCalculator)
-
-    def run_costo_de_oportunidad(self):
-        if not self.is_valid():
-            print("❌ No se pudieron obtener las tasas de cambio para el análisis.")
-            return
-            
-        try:
-            # Revertir al uso de input()
-            dolares_a_evaluar = float(input("\nIngresa la cantidad de divisas a evaluar: "))
-        except ValueError:
-            print("Por favor, ingresa un número válido.")
-            return
-
-        tasas_a_evaluar = [self.tasa_mercado_redondeada - (i * 10) for i in range(1, 6)]
-        
-        # ... (Mantener la lógica de impresión de consola de tu código original) ...
-        
-        print("\n" + "=" * 135)
-        print(f"Costo de Oportunidad por Negociación | Divisas: ${dolares_a_evaluar:.2f}")
-        print("=" * 135)
-        print("{:<12} | {:<12} | {:<15} | {:<15} | {:<12} | {:<18} | {:<25}".format(
-            "Tasa", "Pérdida (Bs)", "Pérdida ($BCV)", "Pérdida ($Merc.)", "IAC (%)", "Factor de Pérdida", "Costo de Oportunidad"
-        ))
-        print("-" * 135)
-
-        valor_max_bolivares = dolares_a_evaluar * self.tasa_mercado_redondeada
-
-        for tasa_actual in tasas_a_evaluar:
-            valor_actual_bolivares = dolares_a_evaluar * tasa_actual
-            perdida_bolivares = valor_max_bolivares - valor_actual_bolivares
-            perdida_usd_bcv = perdida_bolivares / self.tasa_bcv
-            perdida_usd_mercado = perdida_bolivares / self.tasa_mercado_redondeada
-            factor_perdida = 1 - (tasa_actual / self.tasa_mercado_redondeada)
-            IAC = ((self.tasa_mercado_redondeada / tasa_actual) - 1) * 100
-
-            print("{:<12.4f} | {:<12.2f} | {:<15.4f} | {:<15.4f} | {:<12.4f} | {:<18.4f} | {:<25}".format(
-                tasa_actual,
-                perdida_bolivares,
-                perdida_usd_bcv,
-                perdida_usd_mercado,
-                IAC,
-                factor_perdida,
-                "Pérdida por no vender a la mejor tasa"
-            ))
-        print("=" * 135)
+    def display_current_rates(self):
+        print(self.get_exchange_rates_report())

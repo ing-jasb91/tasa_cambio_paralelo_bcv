@@ -1,11 +1,22 @@
+# requirements.txt
+
+# --- Core Web/Data Fetching ---
 requests
-pytz
-python-telegram-bot
-python-telegram-bot[job-queue]
 beautifulsoup4
 lxml
-logging
+python-dotenv # Para la gestión de variables de entorno (.env)
+
+# --- Telegram Bot ---
+python-telegram-bot
+python-telegram-bot[job-queue]
+
+# --- Data Handling y Fechas ---
+pytz         # Para la gestión de zonas horarias (e.g., VET)
+python-dateutil # 🚨 CRÍTICO: Necesario para 'from dateutil import parser' en data_fetcher.py
+
+# --- Dependencias de Cálculo/Visualización (Si las usas) ---
+# Si estas NO se usan en el código actual, considera eliminarlas para aligerar la dependencia.
+# Si están ahí para reportes futuros o análisis offline, mantenlas.
 pandas
 numpy
 matplotlib
-datetime

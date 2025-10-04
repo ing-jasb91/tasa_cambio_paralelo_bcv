@@ -12,6 +12,7 @@ import logging
 from urllib3.exceptions import InsecureRequestWarning
 # Ignorar advertencias de SSL (no recomendado para producción)
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+import os 
 
 
 # Configuración de logging para este módulo
@@ -20,10 +21,8 @@ logger.setLevel(logging.INFO)
 
 BCV_URL = "https://www.bcv.org.ve"
 
-# --- CONFIGURACIÓN DE LA API GRATUITA DE FOREX (ALPHA VANTAGE) ---
-# Separamos el valor de la clave real del placeholder de error
-ALPHA_VANTAGE_API_KEY = "QODS5X4TDMDRNRSM" 
-ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV" 
+ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY") 
+ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV" # Mantener el placeholder es opcional
 
 FOREX_URL = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=USD&apikey={ALPHA_VANTAGE_API_KEY}"
 

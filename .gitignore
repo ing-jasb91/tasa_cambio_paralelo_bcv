@@ -1,2 +1,11 @@
 venv/
+# .gitignore
+
+# Ignorar archivos temporales
 __pycache__/
+
+# Base de datos
+data/exchange_rates.db
+
+# Claves de entorno
+.env 
