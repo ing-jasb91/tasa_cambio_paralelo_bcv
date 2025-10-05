@@ -13,6 +13,8 @@ from urllib3.exceptions import InsecureRequestWarning
 # Ignorar advertencias de SSL (no recomendado para producción)
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import os 
+from dotenv import load_dotenv
+
 
 
 # Configuración de logging para este módulo
@@ -21,10 +23,15 @@ logger.setLevel(logging.INFO)
 
 BCV_URL = "https://www.bcv.org.ve"
 
-ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY") 
-ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV" # Mantener el placeholder es opcional
 
-FOREX_URL = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=USD&apikey={ALPHA_VANTAGE_API_KEY}"
+load_dotenv()  # Cargar variables de entorno desde el archivo .env
+# ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY") 
+# ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV" # Mantener el placeholder es opcional
+EXCHANGE_RATE_API_KEY = os.getenv("EXCHANGE_RATE_API_KEY")
+EXCHANGE_RATE_PLACEHOLDER = "TU_CLAVE_API_ER"
+
+
+FOREX_URL = f"https://v6.exchangerate-api.com/v6/{ EXCHANGE_RATE_API_KEY }/pair/EUR/USD"
 
 # --- Funciones de Web Scraping y Auxiliares (SE MANTIENEN IGUAL) ---
 
@@ -113,33 +120,32 @@ def _get_mercado_rate():
     
 def fetch_forex_eur_usd_rate():
     """
-    Obtiene la tasa EUR/USD del mercado Forex usando la API gratuita de Alpha Vantage.
+    Obtiene la tasa EUR/USD del mercado Forex usando la API gratuita de  ExchangeRate-API.
     (Se mantiene igual)
     """
     try:
-        logger.info("Conectando con Alpha Vantage para obtener la tasa EUR/USD del mercado...")
+        logger.info("Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...")
         # 🚨 NOTA: Asegúrate de que FOREX_URL esté definido
         response = requests.get(FOREX_URL, timeout=8)
         response.raise_for_status()
         data = response.json()
         
         if "Error Message" in data or "Note" in data:
-            logger.error(f"Error de la API de Alpha Vantage: {data.get('Error Message') or data.get('Note')}")
+            logger.error(f"Error de la API de ExchangeRate-API: {data.get('error') or data.get('error-type')}")
             return 0.0
-            
-        rate_info = data.get("Realtime Currency Exchange Rate", {})
-        rate_str = rate_info.get("5. Exchange Rate")
+
+        rate_str = data.get("conversion_rate")
         
         if rate_str:
             forex_rate = float(rate_str)
             logger.info(f"Tasa EUR/USD del mercado obtenida: {forex_rate:.4f}")
             return forex_rate
         
-        logger.warning("Respuesta de Alpha Vantage válida, pero no se encontró la tasa de conversión en el formato esperado.")
+        logger.warning("Respuesta de  ExchangeRate-API válida, pero no se encontró la tasa de conversión en el formato esperado.")
         return 0.0
 
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error de conexión con la API de Alpha Vantage: {e}")
+        logger.error(f"Error de conexión con la API de  ExchangeRate-API: {e}")
         return 0.0
 
 

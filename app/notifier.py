@@ -18,6 +18,8 @@ from src.database_manager import get_latest_rates, get_24h_market_summary
 
 # 🚨 CAMBIO CRÍTICO: Importar la nueva clase centralizada 🚨
 from src.calculator import ExchangeRateCalculator 
+from src.plot_generator import generate_market_plot
+
 
 import os 
 from dotenv import load_dotenv
@@ -58,7 +60,16 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logging.error(f"FALLO en la tarea de actualización de tasas (10min): {e}")
 
-# # --- Función para el reporte (send_hourly_report se mantiene igual) ---
+# Función auxiliar para formatear tasas con 4 decimales (usada en el reporte)
+def format_rate_report(rate):
+    """Formatea la tasa con separador de miles y 4 decimales."""
+    if rate is None:
+        return "N/D"
+    # Formato: X.XXX,XXXX
+    return f"{rate:,.4f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+# # --- Función para el reporte (send_hourly_report) ---
 # async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
 #     """Genera y envía un reporte completo de las tasas de cambio con formato profesional."""
 #     chat_id = context.job.data
@@ -66,11 +77,15 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
 #     # 🚨 Lógica de actualización forzada antes de leer la DB 🚨
 #     try:
 #         # Llama a la extracción. force_save=True anula la lógica de volatilidad del mercado.
+#         # Asumiendo que get_exchange_rates es importada
+#         from src.data_fetcher import get_exchange_rates 
 #         get_exchange_rates(force_save=True)
 #     except Exception as e:
 #         logging.error(f"FALLO al forzar la actualización para el reporte horario: {e}")
         
 #     # Crear una instancia del calculator para obtener la data completa
+#     # Asumiendo que ExchangeRateCalculator es importada
+#     from src.calculator import ExchangeRateCalculator
 #     calc = ExchangeRateCalculator()
     
 #     if not calc.is_valid():
@@ -81,6 +96,7 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
 #     tasa_bcv = calc.USD_BCV
 #     eur_bcv = calc.EUR_BCV
 #     tasa_mercado_cruda = calc.USD_MERCADO_CRUDA
+#     tasa_mercado_redondeada = calc.USD_MERCADO_REDONDEADA # Nueva: Usar la tasa redondeada calculada
 #     forex_eur_usd = calc.EUR_USD_FOREX
 
 #     # 1. CÁLCULOS PRINCIPALES
@@ -90,87 +106,86 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
 #     fpc = tasa_mercado_cruda / tasa_bcv
     
 #     # Resumen de 24 horas (Volatilidad)
+#     # Asumiendo que get_24h_market_summary es importada
+#     from src.database_manager import get_24h_market_summary
 #     market_summary = get_24h_market_summary()
 #     max_24h = market_summary.get('max', tasa_mercado_cruda) if market_summary else tasa_mercado_cruda
 #     min_24h = market_summary.get('min', tasa_mercado_cruda) if market_summary else tasa_mercado_cruda
+#     avg_24h = market_summary.get('avg', tasa_mercado_cruda) if market_summary else tasa_mercado_cruda
+#     count_24h = market_summary.get('count', 0) if market_summary else 0
 
-#     # Lógica: Obtener la hora actual en VET
+#     # Lógica: Obtener la hora actual en VET (Se mantiene)
 #     zona_horaria_vzla = pytz.timezone('America/Caracas')
 #     hora_actual_vzla = datetime.datetime.now(zona_horaria_vzla)
-#     hora_reporte_str = hora_actual_vzla.strftime('%I:%M %p. VET').replace('AM', 'a.m.').replace('PM', 'p.m.') 
+#     hora_reporte_str = hora_actual_vzla.strftime('%d/%m/%Y %I:%M %p. VET').replace('AM', 'a.m.').replace('PM', 'p.m.') 
 
-#     # 2. CONSTRUCCIÓN DEL REPORTE (Se mantiene igual, pero usa las variables de calc)
+#     # 2. CONSTRUCCIÓN DEL REPORTE (AQUÍ ESTÁ LA MEJORA ESTÉTICA)
+    
+#     # Emojis de tendencia para la volatilidad
+#     # Usamos la cruda para el cálculo de tendencia, comparada con el promedio
+#     tendencia_icon = "🟢" 
+#     if tasa_mercado_cruda > avg_24h:
+#         tendencia_icon = "🔴" # Subida
+#     elif tasa_mercado_cruda < avg_24h:
+#         tendencia_icon = "🔵" # Bajada
+
+
 #     reporte = (
-#         f"🇻🇪 *REPORTE DIARIO DE TASAS* | Stats Dev 📊\n"
-#         f"🗓️ *Fecha Valor:* `{calc.latest_rates.get('date', 'Desconocida')}` *({hora_reporte_str})*\n"
-#         f"\n"
+#         f"🌟 *REPORTE DE TASAS* {tendencia_icon} *Stats Dev* 🇻🇪\n"
+#         f"_{hora_reporte_str}_\n\n"
+#         f"═════════════════════\n\n"
         
-#         # --- SECCIÓN 1: TASAS OFICIALES (BCV) ---
-#         f"1️⃣ *Tasas Oficiales (BCV)*\n"
-#         f"_La base legal y contable de los valores._\n"
-#         f"\n"
-#         f"🇺🇸 *Dólar (BCV):* `{tasa_bcv:,.4f}` Bs/USD\n"
-#         f"🇪🇺 *Euro (BCV):* `{eur_bcv:,.4f}` Bs/EUR\n"
-#         f"⚖️ *Paridad EUR/USD Implícita BCV:* `{paridad_bcv:.4f}`\n"
-#         f"\n"
+#         # --- SECCIÓN 1: TASAS CLAVE ---
+#         f"💰 *BCV OFICIAL (USD):* {format_rate_report(tasa_bcv)} Bs\n"
+#         f"💵 *MERCADO CRUDA (USD):* {format_rate_report(tasa_mercado_cruda)} Bs\n"
+#         f"✨ *REFERENCIAL DE CÁLCULO:* {tasa_mercado_redondeada:.2f} Bs\n\n"
+        
+#         # --- SECCIÓN 2: OTROS VALORES ---
+#         f"💶 *EURO (BCV):* {format_rate_report(eur_bcv)} Bs\n"
+#         f"🇪🇺 *EURO (MERCADO):* {format_rate_report(tasa_eur_mercado)} Bs\n"
+#         f"💹 *EUR/USD Forex:* {forex_eur_usd:.5f}\n"
+#         f"⚖️ *EUR/USD BCV:* `{paridad_bcv:.4f}`\n\n"
 
-#         # --- SECCIÓN 2: TASAS DE OPORTUNIDAD DE MERCADO (P2P / Forex) ---
-#         f"2️⃣ *Tasas de Oportunidad de Mercado (P2P / Forex)*\n"
-#         f"_El valor real de su capital y las oportunidades de arbitraje._\n"
-#         f"\n"
-#         f"💸 *Dólar (Mercado):* `{tasa_mercado_cruda:,.4f}` Bs/USD {'⬆️' if max_24h > tasa_mercado_cruda else '⬇️'}\n"
-#         f"💶 *Euro (Implícito):* `{tasa_eur_mercado:,.4f}` Bs/EUR\n"
-#         f"💹 *Paridad EUR/USD Real (Forex):* `{forex_eur_usd:,.5f}`\n"
-#         f"\n"
-
-#         # --- SECCIÓN 3: INDICADORES CLAVE DE DISPARIDAD ---
-#         f"3️⃣ *Indicadores Clave de Disparidad*\n"
-#         f"_Cuantificación de la brecha y volatilidad para la toma de decisiones._\n"
-#         f"\n"
-#         f"📈 *Brecha BCV/Mercado:* `{diferencia_porcentaje:.2f}%`\n"
+#         # --- SECCIÓN 3: INDICADORES Y VOLATILIDAD ---
+#         f"📊 *INDICADORES CLAVE*\n"
+#         f"🔺 *Brecha BCV/Mercado:* `{diferencia_porcentaje:.2f}%`\n"
 #         f"⚖️ *Factor de Ponderación (FPC):* `{fpc:.4f}`\n"
-#         f"_ (El dólar vale {fpc:.4f} veces más en el mercado que en el BCV)_\n"
-#         f"\n"
-#         f"⏱️ *Volatilidad (Máx. 24h):* `{max_24h:,.4f}` Bs/USD\n"
-#         f"⏱️ *Volatilidad (Mín. 24h):* `{min_24h:,.4f}` Bs/USD\n"
-#         f"\n"
-
+#         f"_{tendencia_icon} El mercado está a {fpc:.4f}x la tasa oficial_\n\n"
+        
+#         f"📈 *VOLATILIDAD (Últimas 24h)*\n"
+#         f"⬆️ *Máximo:* {format_rate_report(max_24h)} Bs\n"
+#         f"⬇️ *Mínimo:* {format_rate_report(min_24h)} Bs\n"
+#         f" promedio de {count_24h} registros\n\n"
+        
 #         # --- SECCIÓN 4: OTRAS DIVISAS (REFERENCIAL BCV) ---
-#         f"🌎 *Otras Divisas (Referencial BCV)*\n"
-#         f"🇨🇳 *CNY:* `{calc.latest_rates.get('CNY_BCV', 0.0):.4f}` | 🇹🇷 *TRY:* `{calc.latest_rates.get('TRY_BCV', 0.0):.4f}` | 🇷🇺 *RUB:* `{calc.latest_rates.get('RUB_BCV', 0.0):.4f}`\n"
+#         f"🌐 *OTRAS BCV* (Ref.)\n"
+#         f"🇨🇳 *CNY:* `{calc.latest_rates.get('CNY_BCV', 0.0):.4f}` | 🇹🇷 *TRY:* `{calc.latest_rates.get('TRY_BCV', 0.0):.4f}` | 🇷🇺 *RUB:* `{calc.latest_rates.get('RUB_BCV', 0.0):.4f}`\n\n"
+        
+#         f"═════════════════════\n"
+#         f"📲 Usa /start para acceder a las herramientas de cálculo."
 #     )
 
 #     await context.bot.send_message(chat_id=chat_id, text=reporte, parse_mode="Markdown")
 
+
+
 # app/notifier.py
 
-# ... (otras funciones y variables)
+# ... (importaciones y constantes)
 
-# Función auxiliar para formatear tasas con 4 decimales (usada en el reporte)
-def format_rate_report(rate):
-    """Formatea la tasa con separador de miles y 4 decimales."""
-    if rate is None:
-        return "N/D"
-    # Formato: X.XXX,XXXX
-    return f"{rate:,.4f}".replace(",", "X").replace(".", ",").replace("X", ".")
-
-
-# --- Función para el reporte (send_hourly_report) ---
+# --- Función para el reporte (send_hourly_report) MODIFICADA PARA ENVIAR FOTO ---
 async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
-    """Genera y envía un reporte completo de las tasas de cambio con formato profesional."""
+    """Genera y envía un reporte completo de las tasas de cambio (TEXTO + FOTO)."""
     chat_id = context.job.data
     
     # 🚨 Lógica de actualización forzada antes de leer la DB 🚨
     try:
-        # Llama a la extracción. force_save=True anula la lógica de volatilidad del mercado.
-        # Asumiendo que get_exchange_rates es importada
         from src.data_fetcher import get_exchange_rates 
         get_exchange_rates(force_save=True)
     except Exception as e:
         logging.error(f"FALLO al forzar la actualización para el reporte horario: {e}")
         
     # Crear una instancia del calculator para obtener la data completa
-    # Asumiendo que ExchangeRateCalculator es importada
     from src.calculator import ExchangeRateCalculator
     calc = ExchangeRateCalculator()
     
@@ -182,17 +197,16 @@ async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
     tasa_bcv = calc.USD_BCV
     eur_bcv = calc.EUR_BCV
     tasa_mercado_cruda = calc.USD_MERCADO_CRUDA
-    tasa_mercado_redondeada = calc.USD_MERCADO_REDONDEADA # Nueva: Usar la tasa redondeada calculada
+    tasa_mercado_redondeada = calc.USD_MERCADO_REDONDEADA 
     forex_eur_usd = calc.EUR_USD_FOREX
 
-    # 1. CÁLCULOS PRINCIPALES
+    # 1. CÁLCULOS PRINCIPALES (Se mantienen)
     paridad_bcv = eur_bcv / tasa_bcv if tasa_bcv else 0.0
-    tasa_eur_mercado = calc.EUR_MERCADO_CRUDA # Usamos el valor ya calculado en el init
+    tasa_eur_mercado = calc.EUR_MERCADO_CRUDA 
     diferencia_porcentaje = ((tasa_mercado_cruda / tasa_bcv) - 1) * 100
     fpc = tasa_mercado_cruda / tasa_bcv
     
     # Resumen de 24 horas (Volatilidad)
-    # Asumiendo que get_24h_market_summary es importada
     from src.database_manager import get_24h_market_summary
     market_summary = get_24h_market_summary()
     max_24h = market_summary.get('max', tasa_mercado_cruda) if market_summary else tasa_mercado_cruda
@@ -201,35 +215,42 @@ async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
     count_24h = market_summary.get('count', 0) if market_summary else 0
 
     # Lógica: Obtener la hora actual en VET (Se mantiene)
+    import pytz # Asegúrate de que pytz esté importado arriba
+    import datetime # Asegúrate de que datetime esté importado arriba
     zona_horaria_vzla = pytz.timezone('America/Caracas')
     hora_actual_vzla = datetime.datetime.now(zona_horaria_vzla)
     hora_reporte_str = hora_actual_vzla.strftime('%d/%m/%Y %I:%M %p. VET').replace('AM', 'a.m.').replace('PM', 'p.m.') 
 
-    # 2. CONSTRUCCIÓN DEL REPORTE (AQUÍ ESTÁ LA MEJORA ESTÉTICA)
+    # 2. CONSTRUCCIÓN DEL REPORTE DE TEXTO (CAPTION)
     
     # Emojis de tendencia para la volatilidad
-    # Usamos la cruda para el cálculo de tendencia, comparada con el promedio
     tendencia_icon = "🟢" 
     if tasa_mercado_cruda > avg_24h:
-        tendencia_icon = "🔴" # Subida
+        tendencia_icon = "🔴" 
     elif tasa_mercado_cruda < avg_24h:
-        tendencia_icon = "🔵" # Bajada
+        tendencia_icon = "🔵" 
 
-
+    # NOTA: Debes asegurarte de que la función format_rate_report esté definida
+    # o usar format_currency si es la función correcta en tu proyecto.
+    def format_rate_report(rate):
+        from src.calculator import format_currency # Asume que está en calculator.py
+        return format_currency(rate, decimals=4)
+        
     reporte = (
         f"🌟 *REPORTE DE TASAS* {tendencia_icon} *Stats Dev* 🇻🇪\n"
         f"_{hora_reporte_str}_\n\n"
         f"═════════════════════\n\n"
         
         # --- SECCIÓN 1: TASAS CLAVE ---
-        f"💰 *BCV OFICIAL (USD):* *{format_rate_report(tasa_bcv)}* Bs\n"
-        f"💵 *MERCADO CRUDA (USD):* *{format_rate_report(tasa_mercado_cruda)}* Bs\n"
-        f"✨ *REFERENCIAL DE CÁLCULO:* *{tasa_mercado_redondeada:.2f}* Bs\n\n"
+        f"💰 *BCV OFICIAL (USD):* {format_rate_report(tasa_bcv)} Bs\n"
+        f"💵 *MERCADO CRUDA (USD):* {format_rate_report(tasa_mercado_cruda)} Bs\n"
+        f"✨ *REFERENCIAL DE CÁLCULO:* {tasa_mercado_redondeada:.2f} Bs\n\n"
         
         # --- SECCIÓN 2: OTROS VALORES ---
         f"💶 *EURO (BCV):* {format_rate_report(eur_bcv)} Bs\n"
         f"🇪🇺 *EURO (MERCADO):* {format_rate_report(tasa_eur_mercado)} Bs\n"
-        f"💹 *EUR/USD Forex:* {forex_eur_usd:.5f}\n\n"
+        f"💹 *EUR/USD Forex:* {forex_eur_usd:.5f}\n"
+        f"⚖️ *EUR/USD BCV:* `{paridad_bcv:.4f}`\n\n"
 
         # --- SECCIÓN 3: INDICADORES Y VOLATILIDAD ---
         f"📊 *INDICADORES CLAVE*\n"
@@ -237,7 +258,7 @@ async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
         f"⚖️ *Factor de Ponderación (FPC):* `{fpc:.4f}`\n"
         f"_{tendencia_icon} El mercado está a {fpc:.4f}x la tasa oficial_\n\n"
         
-        f"📈 *VOLATILIDAD (Últimas 24h)*\n"
+        f"📈 *VOLATILIDAD (Últimas 24h) - Gráfico abajo*\n" # <<< AVISO DE LA FOTO
         f"⬆️ *Máximo:* {format_rate_report(max_24h)} Bs\n"
         f"⬇️ *Mínimo:* {format_rate_report(min_24h)} Bs\n"
         f" promedio de {count_24h} registros\n\n"
@@ -250,8 +271,39 @@ async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
         f"📲 Usa /start para acceder a las herramientas de cálculo."
     )
 
-    await context.bot.send_message(chat_id=chat_id, text=reporte, parse_mode="Markdown")
+    # 3. GENERAR Y ENVIAR EL GRÁFICO (FOTO)
+    logging.info("Generando gráfico de mercado para el reporte...")
+    plot_buffer = generate_market_plot(hours=24) # Devuelve el BytesIO
 
+    if plot_buffer:
+        # Enviar la FOTO con el reporte de texto como pie de foto (caption)
+        try:
+            await context.bot.send_photo(
+                chat_id=chat_id,
+                photo=plot_buffer, # Envía el buffer de bytes (la imagen)
+                caption=reporte, # Usa el reporte como pie de foto
+                parse_mode='Markdown'
+            )
+            plot_buffer.close() # Cierra el buffer después de enviarlo
+            logging.info("Reporte horario enviado con éxito (Foto + Caption).")
+            
+        except Exception as e:
+            logging.error(f"Fallo al enviar la foto de volatilidad: {e}. Enviando solo texto.")
+            # Fallback si falla el envío de la foto
+            await context.bot.send_message(
+                chat_id=chat_id, 
+                text="❌ Fallo al adjuntar el gráfico.\n\n" + reporte, 
+                parse_mode='Markdown'
+            )
+            
+    else:
+        # Enviar solo el texto si el gráfico no se pudo generar
+        logging.warning("No se pudo generar el gráfico. Enviando solo texto.")
+        await context.bot.send_message(
+            chat_id=chat_id, 
+            text="❌ *Advertencia:* Fallo al generar el gráfico. Se adjunta el reporte de texto.\n\n" + reporte, 
+            parse_mode='Markdown'
+        )
 
 # --- Funciones de Bot ---
 

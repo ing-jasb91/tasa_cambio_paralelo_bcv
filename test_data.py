@@ -16,7 +16,7 @@ tasa_bcv_usd, tasa_mercado_cruda, tasa_mercado_redondeada = get_exchange_rates()
 if tasa_bcv_usd:
     print(f"\n✅ Extracción Completa (get_exchange_rates):")
     print(f"  Tasa BCV (USD):       {tasa_bcv_usd} Bs/USD")
-    print(f"  Tasa Mercado (Cruda): {tasa_mercado_cruda} Bs/USD")
+    print(f"  Tasa Mercado (Cruda): {tasa_mercado_cruda:.4f} Bs/USD")
 else:
     print("❌ Fallo crítico en la extracción de tasas.")
 
@@ -24,16 +24,19 @@ else:
 print("\n--- Resultado de get_latest_rates() (Consulta SQL) ---")
 latest_data = get_latest_rates()
 
+
 if latest_data:
     print("✅ Último registro en DB:")
     # Imprime un formato legible del diccionario, excluyendo el ID y el timestamp
     print(f"  Fecha: {latest_data.get('date')}")
     print(f"  USD BCV: {latest_data.get('USD_BCV')}")
     print(f"  EUR BCV: {latest_data.get('EUR_BCV')}")
-    print(f"  USD Mercado: {latest_data.get('USD_MERCADO_CRUDA')}")
+    print(f"  USD Mercado: {latest_data.get('USD_MERCADO_CRUDA', 0.0):.4f}")
     print("--------------------------------------------------")
     # LAS NUEVAS TASAS QUE QUEREMOS VER:
-    print(f"  EUR/USD (Implícita BCV): {latest_data.get('EUR_USD_IMPLICITA', 0.0):.4f}")
+    eurusd_impl = float(latest_data.get('EUR_BCV', 0.0)) / float(latest_data.get('USD_BCV')) if latest_data.get('USD_BCV', 0.0) else 0.0
+    print(f"  EUR/USD (Implícita BCV): {eurusd_impl:.4f}")
+    
     print(f"  EUR/USD (Forex Real):   {latest_data.get('EUR_USD_FOREX', 0.0):.4f}")
     print("--------------------------------------------------")
     print(f"  Otras divisas: CNY={latest_data.get('CNY_BCV')}, TRY={latest_data.get('TRY_BCV')}, RUB={latest_data.get('RUB_BCV')}")
