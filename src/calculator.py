@@ -1,11 +1,13 @@
 # src/calculator.py
 import logging
-from src.database_manager import get_latest_rates 
+from src.database_manager import get_latest_rates, get_24h_market_summary 
+# Asegúrate de importar get_24h_market_summary si la usas en el futuro para análisis
+# (Aunque no está aquí, es buena práctica si la vas a usar).
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# --- FUNCIÓN AUXILIAR DE FORMATO (SE MANTIENE IGUAL) ---
+# --- FUNCIÓN AUXILIAR DE FORMATO (DISPONIBLE PARA IMPORTACIÓN) ---
 def format_currency(amount, decimals=2):
     """
     Formatea el monto con separador de miles (punto) y decimales (coma)
@@ -19,7 +21,7 @@ def format_currency(amount, decimals=2):
 
 
 class ExchangeRateCalculator:
-    # (El método __init__, _set_rates, is_valid y _get_currency_rates se mantienen iguales)
+    
     def __init__(self):
         self.latest_rates = get_latest_rates()
         self.valid = False 
@@ -38,9 +40,10 @@ class ExchangeRateCalculator:
 
         if self.USD_BCV > 0.0 and self.USD_MERCADO_CRUDA > 0.0 and self.EUR_USD_FOREX > 0.0:
             self.valid = True
-            self.USD_MERCADO_REDONDEADA = round(self.USD_MERCADO_CRUDA, -1)
+            # Tasa redondeada a la decena (ej: 35.80 -> 40.00, 31.20 -> 30.00)
+            self.USD_MERCADO_REDONDEADA = round(self.USD_MERCADO_CRUDA / 10) * 10
             self.EUR_MERCADO_CRUDA = self.USD_MERCADO_CRUDA * self.EUR_USD_FOREX
-            self.EUR_MERCADO_REDONDEADA = round(self.EUR_MERCADO_CRUDA, -1)
+            self.EUR_MERCADO_REDONDEADA = round(self.EUR_MERCADO_CRUDA / 10) * 10
         else:
             logger.warning("Faltan tasas críticas (BCV USD o Mercado USD o Forex EUR/USD). Cálculos deshabilitados.")
 
@@ -54,13 +57,17 @@ class ExchangeRateCalculator:
             return self.USD_BCV, self.USD_MERCADO_CRUDA, self.USD_MERCADO_REDONDEADA, 'USD', '🇺🇸'
         elif currency.upper() == 'EUR':
             return self.EUR_BCV, self.EUR_MERCADO_CRUDA, self.EUR_MERCADO_REDONDEADA, 'EUR', '🇪🇺'
+        # El BCV no se usa como divisa base en estos flujos, pero se incluye para completar
+        elif currency.upper() == 'BCV':
+            # Solo se necesita la tasa BCV para la conversión, las otras son irrelevantes
+            return self.USD_BCV, None, None, 'BCV', '🏦' 
         else:
             return None, None, None, None, None
 
     # ----------------------------------------------------------------------
-    # 1. ANÁLISIS DE COMPRA (Se mantiene igual)
+    # 1. ANÁLISIS DE COMPRA 
     # ----------------------------------------------------------------------
-    def analyze_purchase(self, cost_amount, available_amount, currency='USD'):
+    def get_compra_report(self, cost_amount, available_amount, currency='USD'):
         """
         Calcula el poder de compra para una divisa específica (USD o EUR) con formato estético.
         """
@@ -68,6 +75,7 @@ class ExchangeRateCalculator:
         if not tasa_bcv or not tasa_mercado_redondeada:
             return f"❌ No hay tasas válidas para {code}.", tasa_mercado_redondeada
 
+        # Tasas a evaluar: Una más 10, y cinco menos 10 (con paso de 10)
         tasas_a_evaluar = [tasa_mercado_redondeada + 10] + [tasa_mercado_redondeada - (i * 10) for i in range(0, 6)]
         tasas_a_evaluar = sorted(list(set(tasas_a_evaluar)), reverse=True)
         
@@ -81,7 +89,25 @@ class ExchangeRateCalculator:
         )
         
         for tasa in tasas_a_evaluar:
-            poder_compra = available_amount * (tasa / tasa_bcv)
+            # La fórmula original es: (CantidadDisponible * TasaMercado) / TasaBCV
+            # Sin embargo, para simular el poder de compra con tasa 'X', el cálculo correcto es:
+            # PoderCompra = (Disponible en Bs a TasaX) / TasaBCV
+            # Asumiendo que el poder de compra se mide por cuántas unidades de BCV obtienes por tu divisa
+            
+            # Una interpretación más simple y común: ¿Qué puedes comprar en bolívares con tu divisa,
+            # y cuánto vale ese producto en bolívares según la tasa BCV?
+            
+            # Simplificamos a: ¿Cuál es el valor del capital disponible en bolívares a esta tasa 'X'?
+            capital_en_bs_a_tasa = available_amount * tasa
+            
+            # Y cuánto de ese capital cubre el costo del producto en bolívares (usando Tasa BCV como base)
+            costo_en_bs_a_bcv = cost_amount * tasa_bcv
+            
+            # Poder de compra (en unidades del producto)
+            unidades_comprables = capital_en_bs_a_tasa / costo_en_bs_a_bcv
+            
+            # El resultado se presenta en la divisa original (USD/EUR)
+            poder_compra = capital_en_bs_a_tasa / tasa_bcv 
             
             suficiente = poder_compra >= cost_amount
             diferencia = poder_compra - cost_amount
@@ -104,18 +130,39 @@ class ExchangeRateCalculator:
         return reporte, tasa_mercado_redondeada
 
     # ----------------------------------------------------------------------
-    # 2. CONVERSIÓN DE DIVISAS (Precio en Bs) (¡IGTF ELIMINADO!)
+    # 2. CONVERSIÓN DE DIVISAS (Precio en Bs) 
     # ----------------------------------------------------------------------
-    def convert_price(self, price_amount, currency='USD'):
-        """Convierte un precio de USD/EUR a Bolívares, sin considerar el IGTF."""
+    def get_conversion_report(self, price_amount, currency='USD'):
+        """Convierte un precio de USD/EUR/BCV a Bolívares, sin considerar el IGTF."""
+        
+        # Lógica para manejar la conversión a BCV. Si la selección fue BCV, usamos USD_BCV como tasa base
+        if currency.upper() == 'BCV':
+            tasa_base = self.USD_BCV # Tasa para BCV
+            tasa_ref = self.USD_MERCADO_CRUDA
+            code, emoji = 'USD', '🏦'
+            
+            # Precio es la cantidad de USD a convertir
+            precio_bcv = price_amount * tasa_base
+            
+            reporte = (
+                f"💱 *Conversión a Tasa BCV ({emoji} {code})*\n"
+                f"Monto Base: *{format_currency(price_amount)} {code}*\n\n"
+                f"--- *Tasas Clave (Bs/{code})* ---\n"
+                f"🏦 Tasa BCV: *{format_currency(tasa_base, decimals=4)}*\n"
+                f"💸 Mercado (Ref.): *{format_currency(tasa_ref, decimals=4)}*\n\n"
+                f"--- *Resultado Final* ---\n"
+                f"Precio Final: *{format_currency(precio_bcv)} Bs*\n"
+            )
+            return reporte, tasa_base
+            
+        
+        # Lógica para USD o EUR
         tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada, code, emoji = self._get_currency_rates(currency)
         if not tasa_bcv or not tasa_mercado_cruda:
             return f"❌ No hay tasas válidas para {code}.", tasa_mercado_redondeada
 
-        # Lógica de IGTF eliminada según solicitud.
-        
         precio_bcv = price_amount * tasa_bcv
-        precio_mercado = price_amount * tasa_mercado_cruda # Cálculo con Tasa Cruda de Mercado
+        precio_mercado = price_amount * tasa_mercado_cruda 
         
         diferencia_cifras = tasa_mercado_cruda - tasa_bcv
         diferencia_porcentaje = (diferencia_cifras / tasa_bcv) * 100
@@ -155,9 +202,9 @@ class ExchangeRateCalculator:
 
 
     # ----------------------------------------------------------------------
-    # 3. COSTO DE OPORTUNIDAD (Se mantiene igual)
+    # 3. COSTO DE OPORTUNIDAD 
     # ----------------------------------------------------------------------
-    def analyze_opportunity_cost(self, sell_amount, currency='USD'):
+    def get_oportunidad_report(self, sell_amount, currency='USD'):
         """
         Calcula el costo de oportunidad (pérdida) de vender una divisa por debajo
         de la tasa de mercado redondeada (mejor precio), con formato estético.
@@ -220,7 +267,7 @@ class ExchangeRateCalculator:
         return reporte, tasa_mercado_redondeada
 
     # ----------------------------------------------------------------------
-    # 4. REPORTE GENERAL (Se mantiene igual)
+    # 4. REPORTE GENERAL
     # ----------------------------------------------------------------------
     def get_exchange_rates_report(self):
         """Genera un reporte completo de las tasas de cambio (principalmente USD)."""
