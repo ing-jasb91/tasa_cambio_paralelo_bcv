@@ -4,18 +4,16 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from dateutil import parser 
-# 🚨 CAMBIO 1: Importamos las nuevas funciones específicas de la DB y la de lectura
+# 🚨 CAMBIO 1: Importamos timedelta para la lógica de tiempo
 from src.database_manager import save_bcv_rates, save_market_rates, get_latest_rates 
 from src.market_fetcher import fetch_binance_p2p_rate 
-from datetime import datetime
+from datetime import datetime, timedelta # <--- IMPORTACIÓN DE TIMEDELTA
 import logging
 from urllib3.exceptions import InsecureRequestWarning
 # Ignorar advertencias de SSL (no recomendado para producción)
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 import os 
 from dotenv import load_dotenv
-
-
 
 # Configuración de logging para este módulo
 logger = logging.getLogger(__name__)
@@ -25,8 +23,6 @@ BCV_URL = "https://www.bcv.org.ve"
 
 
 load_dotenv()  # Cargar variables de entorno desde el archivo .env
-# ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY") 
-# ALPHA_VANTAGE_PLACEHOLDER = "TU_CLAVE_API_AV" # Mantener el placeholder es opcional
 EXCHANGE_RATE_API_KEY = os.getenv("EXCHANGE_RATE_API_KEY")
 EXCHANGE_RATE_PLACEHOLDER = "TU_CLAVE_API_ER"
 
@@ -120,11 +116,11 @@ def _get_mercado_rate():
     
 def fetch_forex_eur_usd_rate():
     """
-    Obtiene la tasa EUR/USD del mercado Forex usando la API gratuita de  ExchangeRate-API.
+    Obtiene la tasa EUR/USD del mercado Forex usando la API gratuita de ExchangeRate-API.
     (Se mantiene igual)
     """
     try:
-        logger.info("Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...")
+        logger.info("Conectando con ExchangeRate-API para obtener la tasa EUR/USD del mercado...")
         # 🚨 NOTA: Asegúrate de que FOREX_URL esté definido
         response = requests.get(FOREX_URL, timeout=8)
         response.raise_for_status()
@@ -141,11 +137,11 @@ def fetch_forex_eur_usd_rate():
             logger.info(f"Tasa EUR/USD del mercado obtenida: {forex_rate:.4f}")
             return forex_rate
         
-        logger.warning("Respuesta de  ExchangeRate-API válida, pero no se encontró la tasa de conversión en el formato esperado.")
+        logger.warning("Respuesta de ExchangeRate-API válida, pero no se encontró la tasa de conversión en el formato esperado.")
         return 0.0
 
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error de conexión con la API de  ExchangeRate-API: {e}")
+        logger.error(f"Error de conexión con la API de ExchangeRate-API: {e}")
         return 0.0
 
 
@@ -157,14 +153,56 @@ def get_exchange_rates(force_save=False):
     (separada para BCV y Mercado) y retornar las tasas principales.
     """
     
-    # 1. Obtención de datos externos
+    now = datetime.now() # Hora actual
+    now_iso = now.isoformat()
+    
+    # 1. Obtención de datos (BCV y P2P - Siempre se consultan)
     scraped_data = _scrape_bcv_rates()
     if scraped_data is None:
         scraped_data = {} 
 
     tasa_mercado_cruda = _get_mercado_rate()
-    tasa_forex_eur_usd = fetch_forex_eur_usd_rate()
     
+    # 2. Obtener el último registro de la DB para la lógica condicional
+    latest_data = get_latest_rates()
+    
+    # ----------------------------------------------------
+    # 3. LÓGICA CONDICIONAL: Tasa EUR/USD FOREX (Solo cada 85 minutos) 🚨 NUEVO CÓDIGO 🚨
+    # ----------------------------------------------------
+    LAST_API_CALL_INTERVAL = timedelta(minutes=85)
+    tasa_forex_eur_usd = 0.0 
+    fetch_new_forex = True 
+
+    last_market_timestamp_str = latest_data.get('timestamp') 
+    tasa_forex_eur_usd_db = latest_data.get('EUR_USD_FOREX')
+
+    if last_market_timestamp_str and tasa_forex_eur_usd_db:
+        try:
+            # Comprobar el tiempo transcurrido
+            last_market_datetime = datetime.fromisoformat(last_market_timestamp_str)
+            time_since_last_call = now - last_market_datetime
+            
+            if time_since_last_call < LAST_API_CALL_INTERVAL:
+                # Usar la tasa guardada y evitar la consulta API
+                tasa_forex_eur_usd = tasa_forex_eur_usd_db
+                fetch_new_forex = False
+                logger.info(f"Usando tasa FOREX guardada. Tiempo restante: {LAST_API_CALL_INTERVAL - time_since_last_call}")
+            else:
+                logger.info("Han pasado 85 minutos. Consultando la API de FOREX.")
+        except ValueError:
+            # Si el timestamp falla, forzar la consulta
+            logger.warning("Fallo al parsear el timestamp de la DB para EUR/USD. Forzando consulta FOREX.")
+            pass # fetch_new_forex sigue siendo True
+    else:
+        logger.info("Datos DB incompletos o primera ejecución. Forzando consulta API de FOREX.")
+    
+    if fetch_new_forex:
+        tasa_forex_eur_usd = fetch_forex_eur_usd_rate()
+    
+    # ----------------------------------------------------
+    # 4. Continúa con el procesamiento y guardado (SE MANTIENE IGUAL)
+    # ----------------------------------------------------
+
     tasa_bcv_usd = scraped_data.get('USD_BCV')
     date_info_raw = scraped_data.get('Fecha') 
     
@@ -173,7 +211,7 @@ def get_exchange_rates(force_save=False):
         logger.error("Fallo la obtención de tasas críticas (USD BCV o USD Mercado). Retornando None.")
         return None, None, None
 
-    # 2. Procesamiento de datos
+    # 5. Procesamiento de datos
     tasa_bcv_eur = scraped_data.get('EUR_BCV')
     bcv_eur_usd_implicita = 0.0
     if isinstance(tasa_bcv_usd, (int, float)) and isinstance(tasa_bcv_eur, (int, float)) and tasa_bcv_usd > 0:
@@ -181,17 +219,14 @@ def get_exchange_rates(force_save=False):
         
     date_info_clean = _convert_date_format(date_info_raw)
     tasa_mercado_redondeada = round(tasa_mercado_cruda, 0)
-    now = datetime.now()
-    now_iso = now.isoformat()
     current_date_str = date_info_clean if date_info_clean else now.strftime("%d/%m/%Y")
 
-    # 3. Datos de la DB para la lógica condicional
-    latest_data = get_latest_rates()
+    # 6. Datos de la DB para la lógica condicional (ya se obtuvo 'latest_data' arriba)
     latest_db_date = latest_data.get('date', '') if latest_data else ''
     latest_db_market_rate = latest_data.get('USD_MERCADO_CRUDA') if latest_data else None
 
     # ----------------------------------------------------
-    # 4. LÓGICA DE GUARDADO CONDICIONAL
+    # 7. LÓGICA DE GUARDADO CONDICIONAL
     # ----------------------------------------------------
     
     bcv_saved = False
@@ -223,7 +258,7 @@ def get_exchange_rates(force_save=False):
         market_data_to_save = {
             'timestamp': now_iso,
             'USD_MERCADO_CRUDA': tasa_mercado_cruda,
-            'EUR_USD_FOREX': tasa_forex_eur_usd,
+            'EUR_USD_FOREX': tasa_forex_eur_usd, # <--- Usa el valor condicional
         }
         market_saved = save_market_rates(market_data_to_save)
         
@@ -237,6 +272,5 @@ def get_exchange_rates(force_save=False):
         logger.error("FALLO CRÍTICO: No se pudo insertar el registro inicial en la base de datos.")
 
 
-    # 5. Retorno de las tasas principales
-    # Retornamos los valores recién obtenidos para usarlos inmediatamente en el bot si es necesario
+    # 8. Retorno de las tasas principales
     return tasa_bcv_usd, tasa_mercado_cruda, tasa_mercado_redondeada

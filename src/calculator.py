@@ -3,6 +3,9 @@ import logging
 from src.database_manager import get_latest_rates, get_24h_market_summary 
 # Asegúrate de importar get_24h_market_summary si la usas en el futuro para análisis
 # (Aunque no está aquí, es buena práctica si la vas a usar).
+import pytz
+from datetime import datetime
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -38,8 +41,19 @@ class ExchangeRateCalculator:
         self.EUR_BCV = float(self.latest_rates.get('EUR_BCV', 0.0))
         self.EUR_USD_FOREX = float(self.latest_rates.get('EUR_USD_FOREX', 0.0))
 
+
+        # Tasas de BCV adicionales (CORRECCIÓN DEL ERROR)
+        self.CNY_BCV = float(self.latest_rates.get('CNY_BCV', 0.0))
+        self.TRY_BCV = float(self.latest_rates.get('TRY_BCV', 0.0))
+        self.RUB_BCV = float(self.latest_rates.get('RUB_BCV', 0.0))
+
         if self.USD_BCV > 0.0 and self.USD_MERCADO_CRUDA > 0.0 and self.EUR_USD_FOREX > 0.0:
             self.valid = True
+            
+            # 🚨 LÍNEA AÑADIDA PARA RESOLVER EL ERROR 🚨
+            # Calcula la tasa EUR/USD implícita (EUR_BCV / USD_BCV)
+            self.EUR_USD_IMPLICITA = self.EUR_BCV / self.USD_BCV 
+
             # Tasa redondeada a la decena (ej: 35.80 -> 40.00, 31.20 -> 30.00)
             self.USD_MERCADO_REDONDEADA = round(self.USD_MERCADO_CRUDA / 10) * 10
             self.EUR_MERCADO_CRUDA = self.USD_MERCADO_CRUDA * self.EUR_USD_FOREX
@@ -81,7 +95,7 @@ class ExchangeRateCalculator:
         
         # CONSTRUCCIÓN DEL REPORTE
         reporte = (
-            f"🛒 *Análisis de Poder de Compra ({emoji} {code})*\n"
+            f"🛒 *Análisis de Poder de Compra ({emoji} {code})* \n"
             f"💰 *Precio Producto:* {format_currency(cost_amount)} {code}\n"
             f"💵 *Capital Disponible:* {format_currency(available_amount)} {code}\n"
             f"_(Tasa BCV Referencial: {format_currency(tasa_bcv, decimals=4)} Bs)_\n\n"
@@ -116,8 +130,8 @@ class ExchangeRateCalculator:
             icono_resultado = "🟢" if suficiente else "🔴"
             
             reporte += (
-                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs*\n"
-                f"   • Poder de Compra: *{format_currency(poder_compra, decimals=2)} {code}*\n"
+                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs* \n"
+                f"   • Poder de Compra: *{format_currency(poder_compra, decimals=2)} {code}* \n"
                 f"   • Resultado Neto: {icono_resultado} *{format_currency(abs(diferencia))}* {code}\n"
             )
 
@@ -145,13 +159,15 @@ class ExchangeRateCalculator:
             precio_bcv = price_amount * tasa_base
             
             reporte = (
-                f"💱 *Conversión a Tasa BCV ({emoji} {code})*\n"
-                f"Monto Base: *{format_currency(price_amount)} {code}*\n\n"
-                f"--- *Tasas Clave (Bs/{code})* ---\n"
-                f"🏦 Tasa BCV: *{format_currency(tasa_base, decimals=4)}*\n"
-                f"💸 Mercado (Ref.): *{format_currency(tasa_ref, decimals=4)}*\n\n"
-                f"--- *Resultado Final* ---\n"
-                f"Precio Final: *{format_currency(precio_bcv)} Bs*\n"
+                f"💱 *Conversión a Tasa BCV ({emoji} {code})* \n\n"
+                f"Monto Base: *{format_currency(price_amount)} {code}* \n\n"
+                
+                f"• *Tasas Clave (Bs/{code})* •\n" # <-- Separador visual más seguro que '---'
+                f"🏦 Tasa BCV: *{format_currency(tasa_base, decimals=4)}* \n"
+                f"💸 Mercado (Ref.): *{format_currency(tasa_ref, decimals=4)}* \n\n"
+                
+                f"• *Resultado Final* •\n"
+                f"Precio Final: *{format_currency(precio_bcv)} Bs* \n"
             )
             return reporte, tasa_base
             
@@ -170,15 +186,15 @@ class ExchangeRateCalculator:
 
         # 1. ENCABEZADO Y RESUMEN PRINCIPAL
         reporte = (
-            f"💱 *Conversión de Precios ({emoji} {code})*\n"
-            f"Monto Base: *{format_currency(price_amount)} {code}*\n\n"
+            f"💱 *Conversión de Precios ({emoji} {code})* \n"
+            f"Monto Base: *{format_currency(price_amount)} {code}* \n\n"
             f"--- *Tasas Clave (Bs/{code})* ---\n"
-            f"🏦 BCV: *{format_currency(tasa_bcv, decimals=4)}*\n"
-            f"💸 Mercado (Cruda): *{format_currency(tasa_mercado_cruda, decimals=4)}*\n"
+            f"🏦 BCV: *{format_currency(tasa_bcv, decimals=4)}* \n"
+            f"💸 Mercado (Cruda): *{format_currency(tasa_mercado_cruda, decimals=4)}* \n"
             f" _(Brecha vs BCV: {format_currency(diferencia_cifras, decimals=4)} Bs | `{diferencia_porcentaje:.2f}%`)_\n\n"
             f"--- *Resultado Final (Precio en Bs)* ---\n"
             f"Precio BCV: {format_currency(precio_bcv)}\n"
-            f"Precio Mercado (Puro): *{format_currency(precio_mercado)}*\n"
+            f"Precio Mercado (Puro): *{format_currency(precio_mercado)}* \n"
             f"Diferencia total: {format_currency(diferencia_total_bs)} Bs\n\n"
             f"--- *Precios por Rango de Tasas* ---\n"
         )
@@ -193,8 +209,8 @@ class ExchangeRateCalculator:
             icono_tasa = "🎯" if abs(tasa - tasa_mercado_redondeada) < 0.01 else "💰"
             
             reporte += (
-                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs*\n"
-                f"   • Precio Final: *{format_currency(precio_rango)} Bs*\n"
+                f"\n{icono_tasa} Tasa: *{format_currency(tasa, decimals=2)} Bs* \n"
+                f"   • Precio Final: *{format_currency(precio_rango)} Bs* \n"
                 f"   • Margen vs BCV: +{format_currency(diferencia_precio)} Bs\n"
             )
         
@@ -220,8 +236,8 @@ class ExchangeRateCalculator:
         
         # CONSTRUCCIÓN DEL REPORTE
         reporte = (
-            f"💸 *Costo de Oportunidad ({emoji} {code})*\n"
-            f"Monto a Vender: *{format_currency(sell_amount)} {code}*\n"
+            f"💸 *Costo de Oportunidad ({emoji} {code})* \n"
+            f"Monto a Vender: *{format_currency(sell_amount)} {code}* \n"
             f"_(Tasa Referencial: *{format_currency(tasa_mercado_redondeada, decimals=2)} Bs*)_\n\n"
             f"--- *Pérdida por Tasa de Venta* ---\n"
         )
@@ -251,7 +267,7 @@ class ExchangeRateCalculator:
                 iac_str = f"`{iac_porcentaje:.2f}%`"
             
             reporte += (
-                f"\n{icono} Tasa: *{format_currency(tasa_actual, decimals=2)} Bs*\n"
+                f"\n{icono} Tasa: *{format_currency(tasa_actual, decimals=2)} Bs* \n"
                 f"   • Pérdida Neta (Bs): {perdida_bs_str}\n"
                 f"   • Pérdida en {code}: {perdida_code_str} {code}\n"
                 f"   • IAC (Aceptación de Costo): {iac_str}\n"
@@ -269,24 +285,70 @@ class ExchangeRateCalculator:
     # ----------------------------------------------------------------------
     # 4. REPORTE GENERAL
     # ----------------------------------------------------------------------
-    def get_exchange_rates_report(self):
-        """Genera un reporte completo de las tasas de cambio (principalmente USD)."""
+    def get_exchange_rates_report(self, summary_24h: dict = None):
+        """Genera un reporte completo de las tasas de cambio (principalmente USD) con un resumen de 24h."""
         if not self.is_valid():
             return "❌ No se pudieron obtener las tasas de cambio desde la base de datos."
             
-        tasa_bcv = self.USD_BCV
+        tasa_bcv_usd = self.USD_BCV
+        tasa_bcv_eur = self.EUR_BCV
         tasa_mercado_cruda = self.USD_MERCADO_CRUDA
+        tasa_mercado_redondeada = self.USD_MERCADO_REDONDEADA
+        eurusd_impl = self.EUR_USD_IMPLICITA
+        eurusd_forex = self.EUR_USD_FOREX
 
-        diferencia_cifras = tasa_mercado_cruda - tasa_bcv
-        diferencia_porcentaje = (diferencia_cifras / tasa_bcv) * 100
+        # Cálculo de métricas del USD (se mantienen)
+        diferencia_cifras = tasa_mercado_cruda - tasa_bcv_usd
+        diferencia_porcentaje = (diferencia_cifras / tasa_bcv_usd) * 100
         
+        # --- Generación del Reporte (Formato Requerido) ---
+        
+        # NOTA: Usar el formato de fecha y hora que usa tu sistema, aquí un ejemplo
+        now_utc = datetime.now(pytz.utc)
+        now_venezuela = now_utc.astimezone(pytz.timezone('America/Caracas'))
+        timestamp_str = now_venezuela.strftime('%d/%m/%Y %I:%M a.m. VET').replace('AM', 'a.m.').replace('PM', 'p.m.')
+
         reporte = (
-            f"📊 *Reporte de Tasas de Cambio*\n\n"
-            f"Tasa Oficial (BCV): {format_currency(tasa_bcv, decimals=4)} Bs/USD\n"
-            f"Tasa Mercado (Cruda): {format_currency(tasa_mercado_cruda, decimals=4)} Bs/USD\n"
-            f"Tasa Mercado (Redondeada): {format_currency(self.USD_MERCADO_REDONDEADA, decimals=4)} Bs/USD\n\n"
-            f"Diferencia Cambiaria: {format_currency(diferencia_cifras, decimals=4)} Bs/USD ({diferencia_porcentaje:.2f}%)\n"
+            f"🌟 *REPORTE DE TASAS* 🔵 *Stats Dev* 🇻🇪\n"
+            f"{timestamp_str}\n\n"
+            
+            f"═════════════════════\n\n"
+            
+            f"💰 *BCV OFICIAL (USD)*: {format_currency(tasa_bcv_usd, decimals=4)} Bs\n"
+            f"💵 *MERCADO CRUDA (USD)*: {format_currency(tasa_mercado_cruda, decimals=4)} Bs\n"
+            f"✨ *REFERENCIAL DE CÁLCULO*: {format_currency(tasa_mercado_redondeada, decimals=2)} Bs\n\n"
+            
+            f"💶 *EURO (BCV)*: {format_currency(tasa_bcv_eur, decimals=4)} Bs\n"
+            f"🇪🇺 *EURO (MERCADO)*: {format_currency(tasa_mercado_cruda * eurusd_forex, decimals=4)} Bs\n" # Asumiendo EUR Mercado = USD Mercado * EUR/USD FOREX
+            f"💹 *EUR/USD Forex*: {format_currency(eurusd_forex, decimals=5)}\n"
+            f"⚖️ *EUR/USD BCV*: {format_currency(eurusd_impl, decimals=4)}\n\n"
+            
+            f"📊 *INDICADORES CLAVE* \n"
+            f"🔺 *Brecha BCV/Mercado*: {format_currency(diferencia_porcentaje, decimals=2)}%\n"
+            f"⚖️ *Factor de Ponderación (FPC)*: {format_currency(tasa_mercado_cruda / tasa_bcv_usd, decimals=4)}\n" # Factor = Mercado / BCV
+            f"🔵 El mercado está a {format_currency(tasa_mercado_cruda / tasa_bcv_usd, decimals=4)}x la tasa oficial\n\n"
         )
+        
+        # Bloque de Volatilidad (Requiere get_24h_market_summary)
+        if summary_24h and summary_24h.get('count', 0) > 0:
+            reporte += (
+                f"📈 *VOLATILIDAD (Últimas 24h) - Gráfico abajo* \n"
+                f"⬆️ *Máximo*: {format_currency(summary_24h['max'], decimals=4)} Bs\n"
+                f"⬇️ *Mínimo*: {format_currency(summary_24h['min'], decimals=4)} Bs\n"
+                f"promedio de {summary_24h['count']} registros\n\n"
+            )
+        else:
+            reporte += f"📈 *VOLATILIDAD (Últimas 24h) - Gráfico abajo* \n_No hay suficientes datos históricos (24h) para el resumen._\n\n"
+
+        # OTRAS BCV
+        reporte += (
+            f"🌐 *OTRAS BCV (Ref.)* \n"
+            f"🇨🇳 CNY: {format_currency(self.CNY_BCV, decimals=4)} | 🇹🇷 TRY: {format_currency(self.TRY_BCV, decimals=4)} | 🇷🇺 RUB: {format_currency(self.RUB_BCV, decimals=4)}\n\n"
+            
+            f"═════════════════════\n"
+            f"📲 Usa /start para acceder a las herramientas de cálculo.\n"
+        )
+
         return reporte
     
     def display_current_rates(self):

@@ -1,12 +1,13 @@
 # app/notifier.py
 
 import logging
+import logging.handlers # <--- AÑADE ESTA LÍNEA
 import pytz
 import datetime
 import os
 from dotenv import load_dotenv
 
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, BotCommand
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, BotCommand, error
 from telegram.ext import (
     Application,
     ApplicationBuilder,
@@ -28,16 +29,73 @@ from src.bot_states import BotState # Importar los estados desde bot_states.py
 from src.database_manager import get_active_alerts, update_alert_rate_and_status
 
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.ERROR 
+# logging.basicConfig(
+#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+#     level=logging.DEBUG 
+# )
+
+# --- Configuración de Logging Avanzada ---
+LOGS_DIR = 'logs'
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
+
+
+# 1. Crear un formateador con todos los detalles solicitados
+# Formato: [TIEMPO-ZONA HORARIA] [SEVERIDAD] [MÓDULO.FUNCIÓN:LÍNEA] [MENSAJE]
+log_formatter = logging.Formatter(
+    fmt='%(asctime)s [%(levelname)s] [%(name)s.%(funcName)s:%(lineno)d] - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
 )
+
+
+# 2. Configurar el logger principal (Root Logger)
+# Establecer el nivel mínimo para el logger principal. 
+# Si está en INFO, solo procesará INFO, WARNING, ERROR, CRITICAL.
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO) # Nivel base
+
+# 3. Crear el Handler para Archivos de INFO (Incluye INFO, WARNING, ERROR)
+info_handler = logging.handlers.RotatingFileHandler(
+    os.path.join(LOGS_DIR, 'info.log'),
+    maxBytes=1048576, # 1MB
+    backupCount=5,
+    encoding='utf-8'
+)
+info_handler.setLevel(logging.INFO)
+info_handler.setFormatter(log_formatter)
+root_logger.addHandler(info_handler)
+
+
+# 4. Crear el Handler para Archivos de ERROR (Solo ERROR y CRITICAL)
+error_handler = logging.handlers.RotatingFileHandler(
+    os.path.join(LOGS_DIR, 'error.log'),
+    maxBytes=1048576, # 1MB
+    backupCount=5,
+    encoding='utf-8'
+)
+error_handler.setLevel(logging.ERROR)
+error_handler.setFormatter(log_formatter)
+root_logger.addHandler(error_handler)
+
+
+# 5. Handler de Consola (Opcional, pero útil)
+# console_handler = logging.StreamHandler()
+# console_handler.setLevel(logging.INFO)
+# console_handler.setFormatter(log_formatter)
+# root_logger.addHandler(console_handler)
+
+# Ahora, el logger usado en notifier.py debe ser 'logger'
+logger = logging.getLogger(__name__)
+# El logger del módulo no necesita reconfigurar el nivel si ya lo hace el root.
+# Sin embargo, lo mantendremos para coherencia:
+logger.setLevel(logging.INFO) 
+
 
 # --- Configuración del Bot de Telegram ---
 load_dotenv() 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ID = os.getenv('CHAT_ID')
-
+# print(CHAT_ID)
 # --- Constantes de la Aplicación ---
 # Las constantes de estado de conversación (10, 11, etc.) se ELIMINAN y se reemplazan por BotState
 
@@ -45,6 +103,19 @@ CHAT_ID = os.getenv('CHAT_ID')
 # ----------------------------------------------------------------------
 # --- 1. Funciones Auxiliares (Reporte y Jobs) ---
 # ----------------------------------------------------------------------
+
+# Función Auxiliar
+def build_main_keyboard() -> InlineKeyboardMarkup:
+    """Crea y devuelve el teclado principal."""
+    keyboard = [
+        [InlineKeyboardButton("📊 Análisis de Compra", callback_data='flow_compra')],
+        [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='flow_oportunidad')],
+        [InlineKeyboardButton("💱 Conversión de Precios", callback_data='flow_cambio')],
+        [InlineKeyboardButton("🔔 Configurar Alerta", callback_data='flow_alerta')],
+        [InlineKeyboardButton("📊 Reporte Diario", callback_data='reporte_diario')],
+        [InlineKeyboardButton("📈 Volatilidad (48h)", callback_data='volatilidad_48h')],
+    ]
+    return InlineKeyboardMarkup(keyboard)
 
 # (Asumiendo que format_rate_report está definido o se importa desde calculator)
 def format_rate_report(rate):
@@ -62,35 +133,57 @@ async def post_init(application: Application) -> None:
     ])
 
 
-async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
-    """Job recurrente para actualizar las tasas de cambio en la DB."""
-    try:
-        tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada = get_exchange_rates()
-        logging.info("Actualización de tasas en segundo plano ejecutada.")
+# async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
+#     """Job recurrente para actualizar las tasas de cambio en la DB."""
+#     try:
+#         tasa_bcv, tasa_mercado_cruda, tasa_mercado_redondeada = get_exchange_rates()
+#         logging.info("Actualización de tasas en segundo plano ejecutada.")
         
-        # 🚨 FUTURO: Lógica de verificación de alertas
-        # await check_and_trigger_alerts(context) 
+#         # 🚨 FUTURO: Lógica de verificación de alertas
+#         # await check_and_trigger_alerts(context) 
         
-    except Exception as e:
-        logging.error(f"FALLO al ejecutar el job de actualización de tasas: {e}")
-
+#     except Exception as e:
+#         logging.error(f"FALLO al ejecutar el job de actualización de tasas: {e}")
 
 async def send_hourly_report(context: ContextTypes.DEFAULT_TYPE):
-    """Genera y envía un reporte completo (Texto + Gráfico)."""
-    chat_id = context.job.data
+    """
+    Función que se ejecuta por JobQueue para enviar el reporte de tasas cada hora.
+    Ahora envía un reporte de texto con el gráfico adjunto.
+    """
+    job = context.job
+    chat_id = job.data
+
+    # 1. Obtener datos y resumen
+    calculator = ExchangeRateCalculator()
+    summary_24h = get_24h_market_summary() # Obtener el resumen de 24h
+    # 2. Generar el reporte de texto (usando el resumen)
+    reporte_texto = calculator.get_exchange_rates_report(summary_24h)
+
+    # 3. Generar el gráfico de volatilidad (devuelve un objeto BytesIO en memoria)
+    image_buffer = generate_market_plot(hours=48) # Generamos el gráfico de 48h (el resumen es de 24h)
     
-    try:
-        # Llama a la extracción. force_save=True anula la lógica de volatilidad.
-        get_exchange_rates(force_save=True)
-    except Exception as e:
-        logging.error(f"FALLO al forzar la actualización para el reporte horario: {e}")
-        
-    calc = ExchangeRateCalculator()
-    
-    if not calc.is_valid():
-        await context.bot.send_message(chat_id=chat_id, text="❌ Error: No se pudieron obtener las tasas de cambio de la base de datos.")
-        return
-    
+    # 4. Enviar el mensaje
+    if image_buffer:
+        # 🚨 CRÍTICO: Usar send_photo para adjuntar el texto como caption (título) 🚨
+        try:
+            await context.bot.send_photo(
+                chat_id=chat_id,
+                photo=image_buffer, # El objeto BytesIO (imagen)
+                caption=reporte_texto,
+                parse_mode='Markdown'
+            )
+            logging.info(f"Reporte de tasas y gráfico enviados a chat {chat_id}.")
+        except Exception as e:
+            logging.error(f"Error al enviar la foto/reporte al chat: {e}")
+    else:
+        # Enviar solo el texto si el gráfico falló
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=reporte_texto,
+            parse_mode='Markdown'
+        )
+        logging.warning("Gráfico falló. Reporte de tasas enviado solo como texto.")
+
 
 # app/notifier.py (Añadir esta función)
 
@@ -172,7 +265,18 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
 
         # 🚨 ANTES: Este job NO recibe chat_id, ya que su data es None
         chat_id = context.job.data 
-
+ # 🚨 CORRECCIÓN CRÍTICA: Añadir esta verificación 🚨
+    # El job de 10 minutos se programó con data=None, por lo que debe saltar el envío.
+        if chat_id is None:
+            logger.info("Job de actualización de DB completado. Omitiendo notificación por falta de chat_id.")
+            # ⚠️ Si solo quiere notificar en el chat del job, puede usar 'return' aquí.
+            # PERO, si también quiere enviar el reporte a un canal fijo (su CHAT_ID global),
+            # debe usar el global como respaldo si está definido:
+            if CHAT_ID: # Usamos la variable global importada del .env
+                chat_id = CHAT_ID
+            else:
+                # Si no hay chat_id ni en el job ni en el global, salimos de la notificación
+                return
         # 🚨 LLAMADA CRÍTICA: Chequear alertas después de actualizar las tasas 🚨
         await check_and_trigger_alerts(context)
         
@@ -272,7 +376,34 @@ async def update_exchange_rates(context: ContextTypes.DEFAULT_TYPE):
             text="❌ *Advertencia:* Fallo al generar el gráfico. Se adjunta el reporte de texto.\n\n" + reporte, 
             parse_mode='Markdown'
         )
+# app/notifier.py (Añadir después de send_hourly_report)
 
+async def send_volatility_plot(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Genera y envía el gráfico de volatilidad del mercado."""
+    chat_id = update.effective_chat.id if update.effective_chat else context.job.data
+    
+    # Llama a la función de src/plot_generator.py
+    plot_path = generate_market_plot() 
+    
+    if plot_path and os.path.exists(plot_path):
+        try:
+            # Envía la foto (el gráfico)
+            await context.bot.send_photo(
+                chat_id=chat_id,
+                photo=open(plot_path, 'rb'),
+                caption="📈 *Volatilidad del Dólar Mercado (Últimas 48h)*",
+                parse_mode='Markdown'
+            )
+            logging.info(f"Gráfico de volatilidad enviado a chat_id: {chat_id}")
+            
+            # Opcional: Eliminar el archivo después de enviarlo para mantener la carpeta limpia
+            os.remove(plot_path)
+            
+        except Exception as e:
+            logging.error(f"Error al enviar el gráfico: {e}")
+            await context.bot.send_message(chat_id=chat_id, text="❌ Error al enviar el gráfico.")
+    else:
+        await context.bot.send_message(chat_id=chat_id, text="❌ No hay suficientes datos históricos (mínimo 2) para generar el gráfico.")
 
 # ----------------------------------------------------------------------
 # --- 2. Funciones de Conversación (Refactorizadas con ConversationHandler) ---
@@ -295,13 +426,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data.pop('flow', None) 
     context.user_data.pop('currency', None) 
     
-    keyboard = [
-        [InlineKeyboardButton("📊 Análisis de Compra", callback_data='flow_compra')],
-        [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='flow_oportunidad')],
-        [InlineKeyboardButton("💱 Conversión de Precios", callback_data='flow_cambio')],
-        [InlineKeyboardButton("🔔 Configurar Alerta", callback_data='flow_alerta')], # Listo para el futuro
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    # keyboard = [
+    #     [InlineKeyboardButton("📊 Análisis de Compra", callback_data='flow_compra')],
+    #     [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='flow_oportunidad')],
+    #     [InlineKeyboardButton("💱 Conversión de Precios", callback_data='flow_cambio')],
+    #     [InlineKeyboardButton("🔔 Configurar Alerta", callback_data='flow_alerta')], # Listo para el futuro
+    #     [InlineKeyboardButton("📊 Reporte Diario", callback_data='reporte_diario')], # Listo para el futuro
+    #     [InlineKeyboardButton("📈 Volatilidad (48h)", callback_data='volatilidad_48h')], # Listo para el futuro
+    # ]
+    # reply_markup = InlineKeyboardMarkup(keyboard)
+        # ✅ USO DE LA FUNCIÓN AUXILIAR
+    reply_markup = build_main_keyboard()
     
     if update.message:
         await update.message.reply_text('¡Hola! Elige una opción para continuar:', reply_markup=reply_markup)
@@ -310,6 +445,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
     # Retorna el estado START
     return BotState.START.value
+
+def build_currency_selection_keyboard(flow_name: str):
+    """
+    Crea un teclado para seleccionar USD o EUR.
+    flow_name debe ser 'COMPRA', 'OPORTUNIDAD', o 'CAMBIO'.
+    """
+    keyboard = [
+        [
+            InlineKeyboardButton("💵 USD", callback_data=f'{flow_name}_USD'),
+            InlineKeyboardButton("💶 EUR", callback_data=f'{flow_name}_EUR')
+        ],
+        [InlineKeyboardButton("⬅️ Menú Principal", callback_data='start')]
+    ]
+    return InlineKeyboardMarkup(keyboard)
 
 
 async def select_flow(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -403,20 +552,20 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         if flow == 'compra':
             # Ejemplo: Validar y calcular la Compra
             costo, cantidad = map(float, text.split())
-            reporte, tasa_ref = calc.get_compra_report(costo, cantidad, currency)
+            reporte, _ = calc.get_compra_report(costo, cantidad, currency)
             await update.message.reply_text(f"✅ *Resultado Análisis de Compra ({currency}):*\n\n{reporte}", parse_mode='Markdown')
             
         elif flow == 'oportunidad':
             # Ejemplo: Validar y calcular la Oportunidad
             cantidad = float(text)
-            reporte, tasa_ref = calc.get_oportunidad_report(cantidad, currency)
+            reporte, _ = calc.get_oportunidad_report(cantidad, currency)
             await update.message.reply_text(f"✅ *Resultado Costo de Oportunidad ({currency}):*\n\n{reporte}", parse_mode='Markdown')
 
         elif flow == 'cambio':
             # Ejemplo: Validar y calcular el Cambio
             cantidad = float(text)
-            reporte = calc.get_conversion_report(cantidad, currency)
-            await update.message.reply_text(f"✅ *Resultado Conversión ({currency}):*\n\n{reporte}", parse_mode='Markdown')
+            reporte_str, _ = calc.get_conversion_report(cantidad, currency)
+            await update.message.reply_text(f"✅ *Resultado Conversión ({currency}):*\n\n{reporte_str}", parse_mode='Markdown')
 
         else:
             await update.message.reply_text("❌ Error: No se pudo determinar la operación a realizar.")
@@ -433,6 +582,108 @@ async def handle_text_input(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     await update.message.reply_text("✨ Proceso completado. Usa /start para un nuevo análisis.", reply_markup=InlineKeyboardMarkup([]))
     
     return ConversationHandler.END
+
+async def handle_main_menu_callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Maneja los callbacks de Reporte Diario y Volatilidad (48h)."""
+    query = update.callback_query
+    await query.answer() # Siempre responde al callback para quitar el reloj
+
+    data = query.data
+    chat_id = update.effective_chat.id
+    
+    # Reutilizamos el teclado principal
+    reply_markup = build_main_keyboard()
+
+    # --- 1. REPORTE DIARIO (Reporte Completo + Volatilidad 24h) ---
+    if data == 'reporte_diario':
+        await context.bot.send_message(chat_id=chat_id, text="⏳ Generando Reporte Diario...")
+        summary_24h = get_24h_market_summary() # Obtener el resumen de 24h
+        calculator = ExchangeRateCalculator()
+        reporte_principal = calculator.get_exchange_rates_report(summary_24h)
+        
+        # 🚨 Solución al KeyError: Usar .get() y validar la data 🚨
+        summary = get_24h_market_summary()
+        reporte_24h = ""
+        
+        if isinstance(summary, dict) and summary.get('count', 0) > 0:
+            # Usar .get() con un valor por defecto para prevenir KeyError
+            period_text = summary.get('period', 'Últimas 24h') 
+            
+            # Formateamos el reporte de volatilidad
+            reporte_24h = (
+                f"\n--- *Volatilidad del Mercado ({period_text})* ---\n"
+                f"📈 Máx: {format_currency(summary['max'], 4)} Bs/USD\n"
+                f"📉 Mín: {format_currency(summary['min'], 4)} Bs/USD\n"
+                f"⭐ Promedio: {format_currency(summary['avg'], 4)} Bs/USD\n"
+                f"═════════════════════════\\n"
+            )
+        
+        reporte_completo = reporte_principal + reporte_24h
+        
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=reporte_completo,
+            reply_markup=reply_markup,
+            parse_mode='Markdown'
+        )
+        # Volvemos al estado START para que el menú se mantenga activo
+        return BotState.START.value
+    
+    # --- 2. VOLATILIDAD (Gráfico de 48h) ---
+    elif data == 'volatilidad_48h':
+        await context.bot.send_message(chat_id=chat_id, text="⏳ Generando Gráfico de Volatilidad (48h)...")
+        
+        # generate_market_plot(hours=48) devuelve un BytesIO buffer
+        # plot_buffer = generate_market_plot(hours=48)
+        
+        # if plot_buffer:
+        #     await context.bot.send_photo(
+        #         chat_id=chat_id,
+        #         photo=plot_buffer,
+        #         caption="📈 *Volatilidad del USD Mercado (Últimas 48 Horas)*\n\nEl gráfico muestra la variación del precio USD/VES en el mercado de referencia.",
+        #         reply_markup=reply_markup,
+        #         parse_mode='Markdown'
+        #     )
+        # else:
+        #     await context.bot.send_message(
+        #         chat_id=chat_id,
+        #         text="❌ Error al generar el gráfico. Asegúrate de tener suficientes datos históricos.",
+        #         reply_markup=reply_markup,
+        #         parse_mode='Markdown'
+        #     )
+        try:
+            plot_buffer = generate_market_plot(hours=48)
+            await context.bot.send_photo(
+                chat_id=chat_id, # Ahora chat_id tiene un valor válido
+                photo=plot_buffer,
+                caption="📈 *Volatilidad del USD Mercado (Últimas 48 Horas)*\n\nEl gráfico muestra la variación del precio USD/VES en el mercado de referencia.",
+                reply_markup=reply_markup,
+                parse_mode='Markdown'
+                )
+        except error.BadRequest as e:
+            # Esto solo debería ocurrir si el CHAT_ID es inválido (no empty) o el bot no tiene acceso
+            logger.error(f"Fallo al enviar la foto de volatilidad: Chat_id is empty. Enviando solo texto. Error: {e}")
+            # Line 357
+            await context.bot.send_message(
+                chat_id=chat_id, # Ahora chat_id tiene un valor válido
+                text="❌ Error al generar el gráfico. Asegúrate de tener suficientes datos históricos.",
+                reply_markup=reply_markup,
+                parse_mode='Markdown'
+                )
+
+        
+        return BotState.START.value
+        
+    # Si no es un reporte, dejamos que el flujo normal (ConversationHandler) continúe.
+    # Los flujos flow_compra, flow_oportunidad, etc., ya deben estar manejados
+    # por otros handlers o por la función que llama a este handler.
+    # Si quieres que este handler maneje todos los callbacks del menú,
+    # puedes añadir aquí las redirecciones a los estados:
+    # elif data == 'flow_compra':
+    #     return BotState.SELECT_CURRENCY_COMPRA.value
+    
+    # Dejaremos que el ConversationHandler se encargue de los otros flujos para no tocar start.
+    return BotState.START.value
 
 # app/notifier.py (Añadir estas funciones a la sección de handlers)
 
@@ -515,6 +766,38 @@ async def save_alert_and_end(update: Update, context: ContextTypes.DEFAULT_TYPE)
     return ConversationHandler.END
 
 
+# app/notifier.py (Añade o verifica que estas funciones existen)
+
+# Asumiendo que BotState está importado de src.bot_states
+# from src.bot_states import BotState 
+
+async def handle_flow_compra(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia el flujo de Análisis de Compra."""
+    query = update.callback_query
+    await query.answer()
+    # Lógica para pedir la divisa de compra
+    await query.edit_message_text("💵 *Análisis de Compra:*\nSelecciona la divisa que deseas analizar (USD o EUR).", 
+                                  reply_markup=build_currency_selection_keyboard('COMPRA'),
+                                  parse_mode='Markdown')
+    # Retorna el estado correcto para continuar el flujo
+    return BotState.SELECT_CURRENCY_COMPRA.value 
+
+# Debes hacer lo mismo con el resto de los flujos que uses en tu ConversationHandler:
+async def handle_flow_oportunidad(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia el flujo de Costo de Oportunidad."""
+    # ... Lógica ...
+    return BotState.SELECT_CURRENCY_OPORTUNIDAD.value
+
+async def handle_flow_cambio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia el flujo de Conversión de Precios."""
+    # ... Lógica ...
+    return BotState.SELECT_CURRENCY_CAMBIO.value
+
+async def handle_flow_alerta(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Inicia el flujo de Configuración de Alerta."""
+    # ... Lógica ...
+    return BotState.SELECT_ALERT_CURRENCY.value
+
 
 # ----------------------------------------------------------------------
 # --- 3. Configuración Principal del Bot ---
@@ -550,11 +833,22 @@ def start_bot():
         entry_points=[CommandHandler('start', start)],
         
         states={
-            # 0. ESTADO INICIAL: Espera la selección de flujo (Compra, Oportunidad, Cambio, Alerta)
-            BotState.START.value: [
-                CallbackQueryHandler(select_flow, pattern='^flow_'),
-            ],
+            # # 0. ESTADO INICIAL: Espera la selección de flujo (Compra, Oportunidad, Cambio, Alerta)
+            # BotState.START.value: [
+            #     CallbackQueryHandler(select_flow, pattern='^flow_'),
+            # ],
+                    # 1. ESTADO PRINCIPAL (MENÚ)
+        BotState.START.value: [
+            # 🚨 AÑADE ESTE HANDLER AQUÍ 🚨
+            CallbackQueryHandler(select_flow, pattern='^flow_'),
+            CallbackQueryHandler(handle_main_menu_callbacks, pattern='^reporte_diario$|^volatilidad_48h$'),
             
+            # Los otros handlers para los flujos principales (flow_compra, etc.)
+            CallbackQueryHandler(handle_flow_compra, pattern='^flow_compra$'), # Ejemplo: Asegúrate de que esto exista
+            # ...
+        ],
+
+
             # 1. FLUJO DE COMPRA
             BotState.SELECT_CURRENCY_COMPRA.value: [
                 CallbackQueryHandler(handle_currency_selection, pattern='^CURRENCY_'),

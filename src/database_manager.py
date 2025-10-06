@@ -206,7 +206,6 @@ def get_24h_market_summary() -> dict | None:
         # 1. Definir la marca de tiempo de hace 24 horas
         time_24h_ago = datetime.now() - timedelta(hours=24)
         time_limit_iso = time_24h_ago.isoformat()
-        
         # 2. Consulta SQL adaptada a la nueva tabla MARKET_RATES
         cursor.execute("""
             SELECT 
@@ -220,11 +219,18 @@ def get_24h_market_summary() -> dict | None:
         
         summary_row = cursor.fetchone()
 
-        if summary_row and summary_row['max'] is not None:
-            # Mapear la tupla de resultados a un diccionario (funciona gracias a row_factory)
-            return dict(summary_row)
-        
+
+        # if summary_row and summary_row['max'] is not None:
+        #     # Mapear la tupla de resultados a un diccionario (funciona gracias a row_factory)
+        #     return dict(summary_row)
+        summary = dict(summary_row) if summary_row else None
+
+        # Verificamos si la fila existe Y si el conteo es mayor a 1 (para tener min/max/avg válidos)
+        # O si es mayor a 0 para que al menos se muestre el gráfico (que usa otra consulta)
+        if summary and summary.get('count', 0) > 1:
+            return summary
         return None
+
 
     except sqlite3.Error as e:
         logger.error(f"Error al obtener el resumen de 24h: {e}")

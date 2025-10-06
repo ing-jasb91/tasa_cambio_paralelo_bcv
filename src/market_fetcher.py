@@ -5,7 +5,7 @@ import logging
 
 # --- CONFIGURACIÓN DE LOGGING: Asegura que los mensajes se vean ---
 # Configuramos el nivel de registro global a INFO y el formato.
-logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(message)s') 
+# logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(message)s') 
 logger = logging.getLogger(__name__)
 
 # Nota: Los umbrales de MIN_ORDERS y MIN_FINISH_RATE ya no se usan para

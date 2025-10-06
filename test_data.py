@@ -5,7 +5,7 @@ from src.database_manager import get_latest_rates
 import logging
 
 # Configuración básica de logging para ver advertencias (como IntegrityError)
-logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(name)s:%(message)s')
+# logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(name)s:%(message)s')
 
 # --- PRUEBA 1: Extracción y Guardado (ESTO HACE LA INSERCIÓN) ---
 print("--- Ejecutando extracción y guardado ---")

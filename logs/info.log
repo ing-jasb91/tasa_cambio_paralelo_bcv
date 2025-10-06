@@ -1,0 +1,823 @@
+2025-10-05 18:48:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 18:49:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 18:49:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 18:49:11 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 18:49:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 18:49:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:49:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 18:49:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 18:49:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 18:49:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:50:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:51:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:52:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:53:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:54:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:55:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:55:20 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:55:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:55:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:55:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:56:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:22 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:57:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:23 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "update_exchange_rates (trigger: interval[0:10:00], next run at: 2025-10-05 23:08:23 UTC)" (scheduled at 2025-10-05 22:58:23.407424+00:00)
+2025-10-05 18:58:23 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 18:58:24 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 18:58:24 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.1323 Bs/USDT (Peso Total: 19440.68)
+2025-10-05 18:58:24 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 18:58:25 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 18:58:25 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 18:58:25 [INFO] [src.data_fetcher.get_exchange_rates:231] - Volatilidad (0.017%) no supera el 0.1%. Omitiendo inserción en MARKET_RATES.
+2025-10-05 18:58:25 [INFO] [root.update_exchange_rates:265] - Actualización de tasas en segundo plano ejecutada.
+2025-10-05 18:58:25 [INFO] [app.notifier.update_exchange_rates:272] - Job de actualización de DB completado. Omitiendo notificación por falta de chat_id.
+2025-10-05 18:58:25 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 18:58:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 18:58:27 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "update_exchange_rates (trigger: interval[0:10:00], next run at: 2025-10-05 23:08:23 UTC)" executed successfully
+2025-10-05 18:58:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:58:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 18:59:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:00:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:01:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:02:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:03:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:04:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:05:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:05:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:05:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:05:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:05:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:18 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:06:18 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:06:18 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:06:19 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2376 Bs/USDT (Peso Total: 13285.54)
+2025-10-05 19:06:19 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:06:20 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:06:20 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:06:20 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:06:21 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:06:21 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:06:21 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:06:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:06:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:06:22 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:06:22 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:06:22 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:06:22 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:06:22 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:06:22 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:06:22 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 4ae0c79ea0ea42c1a2037a1de0f3eed2
+2025-10-05 19:06:22 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:06:22 UTC], next run at: 2025-10-05 23:06:22 UTC)" (scheduled at 2025-10-05 23:06:22.119968+00:00)
+2025-10-05 19:06:22 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:06:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:06:23 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:06:23 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:06:22 UTC], next run at: 2025-10-05 23:06:22 UTC)" executed successfully
+2025-10-05 19:06:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:06:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:06:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:06:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:06:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:06:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:07:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:08:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:09:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:09:20 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:09:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:09:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:09:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:37 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:10:38 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:10:38 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:10:39 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.3024 Bs/USDT (Peso Total: 14065.53)
+2025-10-05 19:10:39 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:10:40 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:10:40 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:10:40 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:10:40 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:10:40 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:10:40 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:10:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:10:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:10:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:10:41 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:10:41 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:10:41 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:10:41 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:10:41 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:10:41 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 4ff069664f794ebe94ef71156ff4426d
+2025-10-05 19:10:41 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:10:41 UTC], next run at: 2025-10-05 23:10:41 UTC)" (scheduled at 2025-10-05 23:10:41.609636+00:00)
+2025-10-05 19:10:41 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:10:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:10:43 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:10:43 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:10:41 UTC], next run at: 2025-10-05 23:10:41 UTC)" executed successfully
+2025-10-05 19:10:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:10:57 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:10:57 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:10:58 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:14:07 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:14:07 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:14:07 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:14:08 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.3083 Bs/USDT (Peso Total: 9161.58)
+2025-10-05 19:14:08 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:14:09 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:14:09 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:14:09 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:14:09 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:14:09 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:14:09 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:14:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:14:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:14:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:14:10 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:14:10 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:14:10 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:14:10 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:14:10 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:14:10 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 2c992069aa5b4832a6cb4ae172b439de
+2025-10-05 19:14:10 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:14:10 UTC], next run at: 2025-10-05 23:14:10 UTC)" (scheduled at 2025-10-05 23:14:10.688205+00:00)
+2025-10-05 19:14:10 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:14:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:14:12 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:14:12 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:14:10 UTC], next run at: 2025-10-05 23:14:10 UTC)" executed successfully
+2025-10-05 19:14:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:14:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:14:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:14:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:17 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:15:17 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:15:17 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:15:22 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:15:23 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:15:23 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:15:23 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2867 Bs/USDT (Peso Total: 12600.86)
+2025-10-05 19:15:23 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:15:24 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:15:24 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:15:24 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:15:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:15:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:15:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:15:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:15:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:15:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:15:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:15:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:15:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:15:26 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:15:26 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:15:26 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job aa146f1d11d542cb96aa1d964ba6baf0
+2025-10-05 19:15:26 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:15:26 UTC], next run at: 2025-10-05 23:15:26 UTC)" (scheduled at 2025-10-05 23:15:26.394585+00:00)
+2025-10-05 19:15:26 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:15:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:15:28 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:15:28 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:15:26 UTC], next run at: 2025-10-05 23:15:26 UTC)" executed successfully
+2025-10-05 19:15:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:15:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:16:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:17:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:18:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:18:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:18:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:18:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:18:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:20 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:19:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:20:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:22 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:21:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:22:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:23:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:24:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:25 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "update_exchange_rates (trigger: interval[0:10:00], next run at: 2025-10-05 23:35:25 UTC)" (scheduled at 2025-10-05 23:25:25.395986+00:00)
+2025-10-05 19:25:26 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:25:26 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:25:26 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2737 Bs/USDT (Peso Total: 12073.53)
+2025-10-05 19:25:26 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:25:27 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:25:27 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:25:27 [INFO] [src.data_fetcher.get_exchange_rates:231] - Volatilidad (0.004%) no supera el 0.1%. Omitiendo inserción en MARKET_RATES.
+2025-10-05 19:25:27 [INFO] [root.update_exchange_rates:265] - Actualización de tasas en segundo plano ejecutada.
+2025-10-05 19:25:27 [INFO] [app.notifier.update_exchange_rates:272] - Job de actualización de DB completado. Omitiendo notificación por falta de chat_id.
+2025-10-05 19:25:27 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:25:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:25:29 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "update_exchange_rates (trigger: interval[0:10:00], next run at: 2025-10-05 23:35:25 UTC)" executed successfully
+2025-10-05 19:25:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:25:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:26:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:33 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:27:33 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:27:33 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:27:35 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:27:36 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:27:36 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:27:37 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2480 Bs/USDT (Peso Total: 15434.90)
+2025-10-05 19:27:37 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:27:37 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:27:37 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:27:38 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:27:38 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:27:38 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:27:38 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:27:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:27:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:27:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:27:39 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:27:39 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:27:39 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:27:39 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:27:39 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:27:39 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 556b2397a2a046e2ba42e00b58780d8e
+2025-10-05 19:27:39 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:27:39 UTC], next run at: 2025-10-05 23:27:39 UTC)" (scheduled at 2025-10-05 23:27:39.564867+00:00)
+2025-10-05 19:27:39 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:27:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:27:41 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:27:41 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:27:39 UTC], next run at: 2025-10-05 23:27:39 UTC)" executed successfully
+2025-10-05 19:27:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:27:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:27:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:27:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:27:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:28:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:28:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:28:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:28:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:28:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:28:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:29:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:30:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:31:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:32:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:33:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:16 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:34:16 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:34:16 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:34:20 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:34:21 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:34:21 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:34:21 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2345 Bs/USDT (Peso Total: 16371.10)
+2025-10-05 19:34:21 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:34:22 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:34:22 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:34:22 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:34:23 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:34:23 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:34:23 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:34:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:34:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:34:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:34:24 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:34:24 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:34:24 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:34:24 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:34:24 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:34:24 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 0e9e709df78349eb88d6ce40b5ad41b9
+2025-10-05 19:34:24 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:34:24 UTC], next run at: 2025-10-05 23:34:24 UTC)" (scheduled at 2025-10-05 23:34:24.290210+00:00)
+2025-10-05 19:34:24 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:34:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:34:26 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:34:26 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:34:24 UTC], next run at: 2025-10-05 23:34:24 UTC)" executed successfully
+2025-10-05 19:34:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:34:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:34:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:34:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:34:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:34:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:34:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:34:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:34:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:35:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:36:40 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:36:40 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:36:40 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:36:42 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:36:43 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:36:43 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:36:44 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2226 Bs/USDT (Peso Total: 11958.43)
+2025-10-05 19:36:44 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:37:00 [ERROR] [src.data_fetcher.fetch_forex_eur_usd_rate:148] - Error de conexión con la API de  ExchangeRate-API: HTTPSConnectionPool(host='v6.exchangerate-api.com', port=443): Max retries exceeded with url: /v6/502ab14943ca425c6c115d45/pair/EUR/USD (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000014F199ADD10>, 'Connection to v6.exchangerate-api.com timed out. (connect timeout=8)'))
+2025-10-05 19:37:00 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:37:00 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:37:01 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:37:01 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:37:01 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:37:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:37:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:37:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:37:02 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:37:02 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:37:02 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:37:02 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:37:02 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:37:02 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job af02ac68843549769a1f51b9d03f50d1
+2025-10-05 19:37:02 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:37:02 UTC], next run at: 2025-10-05 23:37:02 UTC)" (scheduled at 2025-10-05 23:37:02.586143+00:00)
+2025-10-05 19:37:02 [WARNING] [src.calculator._set_rates:62] - Faltan tasas críticas (BCV USD o Mercado USD o Forex EUR/USD). Cálculos deshabilitados.
+2025-10-05 19:37:02 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:37:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:37:04 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:37:04 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:37:02 UTC], next run at: 2025-10-05 23:37:02 UTC)" executed successfully
+2025-10-05 19:37:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:37:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:37:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:37:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:37:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:38:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:39:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:39:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:39:22 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:39:23 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:39:23 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:39:23 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.1618 Bs/USDT (Peso Total: 11384.17)
+2025-10-05 19:39:23 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:39:24 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:39:24 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:39:24 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:39:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:39:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:39:25 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:39:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:39:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:39:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:39:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:39:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:39:26 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:39:26 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:39:26 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:39:26 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 9b03e157c8914e38b69f42fe86c40c53
+2025-10-05 19:39:26 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:39:26 UTC], next run at: 2025-10-05 23:39:26 UTC)" (scheduled at 2025-10-05 23:39:26.353960+00:00)
+2025-10-05 19:39:26 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:39:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:39:28 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:39:28 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:39:26 UTC], next run at: 2025-10-05 23:39:26 UTC)" executed successfully
+2025-10-05 19:39:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:39:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:39:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:40:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:40:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:40:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:40:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:22 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:40:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:41:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:42:41 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:42:41 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:42:42 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:42:46 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:42:46 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:42:46 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:42:47 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2292 Bs/USDT (Peso Total: 14817.22)
+2025-10-05 19:42:47 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:42:48 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:42:48 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:42:48 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:42:48 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:42:48 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:42:48 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:42:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:42:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:42:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:42:49 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:42:49 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:42:49 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:42:49 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:42:49 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:42:49 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 2180a4469fe64a7fb5af34dce4239d8d
+2025-10-05 19:42:49 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:42:49 UTC], next run at: 2025-10-05 23:42:49 UTC)" (scheduled at 2025-10-05 23:42:49.734966+00:00)
+2025-10-05 19:42:50 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:42:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:42:51 [INFO] [root.send_hourly_report:176] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:42:51 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:42:49 UTC], next run at: 2025-10-05 23:42:49 UTC)" executed successfully
+2025-10-05 19:43:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:43:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:43:20 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:43:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:43:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:43:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:44:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:19 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:45:19 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:45:19 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:45:26 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:45:27 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:45:27 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:45:28 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.1077 Bs/USDT (Peso Total: 16787.46)
+2025-10-05 19:45:28 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:45:33 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:45:33 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:45:33 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:45:33 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:45:33 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:45:33 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:45:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:45:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:45:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:45:34 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:45:34 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:45:34 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:45:34 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:45:34 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:45:34 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 4da3ec57c6524e5cbd96ebd1343ef8a6
+2025-10-05 19:45:34 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:45:34 UTC], next run at: 2025-10-05 23:45:34 UTC)" (scheduled at 2025-10-05 23:45:34.703743+00:00)
+2025-10-05 19:45:35 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:45:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:45:36 [INFO] [root.send_hourly_report:177] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:45:36 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:45:34 UTC], next run at: 2025-10-05 23:45:34 UTC)" executed successfully
+2025-10-05 19:45:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:45:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:45:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:45:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:45:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:46:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:46:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:46:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:46:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:46:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:46:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:05 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 19:47:05 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 19:47:05 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
+2025-10-05 19:47:08 [INFO] [src.database_manager.initialize_db:85] - Estructura de la base de datos asegurada (incluyendo USER_ALERTS).
+2025-10-05 19:47:08 [INFO] [src.data_fetcher._scrape_bcv_rates:66] - Conexión exitosa con el BCV (Status: 200). Procediendo a extraer datos.
+2025-10-05 19:47:08 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:39] - Conectando con Binance P2P API para obtener la tasa del mercado (Promedio Ponderado)...
+2025-10-05 19:47:09 [INFO] [src.market_fetcher.fetch_binance_p2p_rate:80] - Tasa de mercado PONDERADA calculada: 291.2082 Bs/USDT (Peso Total: 16484.87)
+2025-10-05 19:47:09 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:127] - Conectando con  ExchangeRate-API para obtener la tasa EUR/USD del mercado...
+2025-10-05 19:47:10 [INFO] [src.data_fetcher.fetch_forex_eur_usd_rate:141] - Tasa EUR/USD del mercado obtenida: 1.1741
+2025-10-05 19:47:10 [INFO] [src.data_fetcher.get_exchange_rates:212] - Fecha BCV (05/10/2025) no ha cambiado. Omitiendo inserción en BCV_RATES.
+2025-10-05 19:47:10 [INFO] [src.data_fetcher.get_exchange_rates:235] - Proceso de guardado completado. BCV: False, Mercado: True.
+2025-10-05 19:47:10 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:47:10 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:47:10 [INFO] [apscheduler.scheduler.add_job:507] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 19:47:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getMe "HTTP/1.1 200 OK"
+2025-10-05 19:47:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/setMyCommands "HTTP/1.1 200 OK"
+2025-10-05 19:47:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 19:47:11 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:47:11 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "update_exchange_rates" to job store "default"
+2025-10-05 19:47:11 [INFO] [apscheduler.scheduler._real_add_job:1090] - Added job "send_hourly_report" to job store "default"
+2025-10-05 19:47:11 [INFO] [apscheduler.scheduler.start:214] - Scheduler started
+2025-10-05 19:47:11 [INFO] [telegram.ext.Application.start:633] - Application started
+2025-10-05 19:47:11 [INFO] [apscheduler.scheduler.remove_job:728] - Removed job 843f42fcf80241429546851d15ec73ef
+2025-10-05 19:47:11 [INFO] [apscheduler.executors.default.run_coroutine_job:179] - Running job "send_hourly_report (trigger: date[2025-10-05 23:47:11 UTC], next run at: 2025-10-05 23:47:11 UTC)" (scheduled at 2025-10-05 23:47:11.717918+00:00)
+2025-10-05 19:47:11 [INFO] [src.plot_generator.generate_market_plot:193] - Gráfico de mercado generado exitosamente en memoria (BytesIO).
+2025-10-05 19:47:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendPhoto "HTTP/1.1 200 OK"
+2025-10-05 19:47:12 [INFO] [root.send_hourly_report:175] - Reporte de tasas y gráfico enviados a chat 552061604.
+2025-10-05 19:47:12 [INFO] [apscheduler.executors.default.run_coroutine_job:203] - Job "send_hourly_report (trigger: date[2025-10-05 23:47:11 UTC], next run at: 2025-10-05 23:47:11 UTC)" executed successfully
+2025-10-05 19:47:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:47:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:47:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:47:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:47:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:47:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:48:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:49:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:50:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:50:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:50:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:50:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:50:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:50:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:50:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:51:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:51:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:51:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:51:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:51:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:51:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:51:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:51:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:51:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:51:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-10-05 19:51:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/editMessageText "HTTP/1.1 200 OK"
+2025-10-05 19:51:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:51:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:51:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 19:52:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:52:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:52:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:52:35 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:52:45 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:52:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:25 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:53:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:47 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:54:57 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:07 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:17 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:27 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:38 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:48 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:55:58 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:08 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:18 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:28 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:39 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:49 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:56:59 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:57:09 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:57:12 [WARNING] [apscheduler.executors.default.run_coroutine_job:176] - Run time of job "update_exchange_rates (trigger: interval[0:10:00], next run at: 2025-10-06 00:07:10 UTC)" was missed by 0:00:01.332691
+2025-10-05 19:57:19 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:57:29 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:57:40 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:57:50 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:00 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:10 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:20 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:30 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:41 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:58:51 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:01 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:11 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:21 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:31 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 19:59:52 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:02 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:12 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:22 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:32 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:00:53 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:03 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:13 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:23 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:33 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:43 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:01:54 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:04 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:14 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:24 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:34 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:44 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:02:55 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:05 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:15 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:36 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:46 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:03:56 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:06 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:16 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:26 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:37 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:42 [INFO] [httpx._send_single_request:1740] - HTTP Request: POST https://api.telegram.org/bot8245434556:AAHbBZagDIxZul86yeUzYSXdxsr5fkRlG8I/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 20:04:42 [INFO] [telegram.ext.Application.stop:667] - Application is stopping. This might take a moment.
+2025-10-05 20:04:42 [INFO] [apscheduler.scheduler.shutdown:245] - Scheduler has been shut down
+2025-10-05 20:04:42 [INFO] [telegram.ext.Application.stop:703] - Application.stop() complete
