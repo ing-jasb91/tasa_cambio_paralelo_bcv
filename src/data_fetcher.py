@@ -8,6 +8,7 @@ from dateutil import parser
 from src.database_manager import save_bcv_rates, save_market_rates, get_latest_rates 
 from src.market_fetcher import fetch_binance_p2p_rate 
 from datetime import datetime, timedelta # <--- IMPORTACIÓN DE TIMEDELTA
+import locale
 import logging
 from urllib3.exceptions import InsecureRequestWarning
 # Ignorar advertencias de SSL (no recomendado para producción)
@@ -87,24 +88,84 @@ def _scrape_bcv_rates():
             date_info = date_match.group(1) if date_match else date_tag.text.strip()
     
     all_rates['Fecha'] = date_info
-        
+
+    # print(all_rates)  # Debug: Imprimir las tasas extraídas    
     return all_rates
 
+# def _convert_date_format(date_string):
+#     """Convierte la fecha extraída ('Martes, 30 Septiembre 2025') a 'DD/MM/YYYY' usando dateutil."""
+#     try:
+#         match = re.search(r'(\d{1,2}\s\w+\s\d{4})', date_string) 
+#         if not match:
+#             return None
+        
+#         date_part = match.group(1).strip()
+#         # fecha_obj = parser.parse(date_part) 
+#         fecha_obj = parser.parse(date_part, locale='es')
+        
+#         # Formateamos al formato final DD/MM/AAAA
+#         return fecha_obj.strftime("%d/%m/%Y")
+        
+#     except Exception as e:
+#         logger.error(f"Error al parsear la fecha con dateutil: {e}")
+#         return None
+
 def _convert_date_format(date_string):
-    """Convierte la fecha extraída ('Martes, 30 Septiembre 2025') a 'DD/MM/YYYY' usando dateutil."""
+    """
+    Convierte la fecha (ej: 'Martes, 30 Septiembre 2025') a 'DD/MM/YYYY' usando datetime.
+    Configura el locale a español para reconocer días y meses.
+    """
+    # 1. Configurar el locale a español para que datetime reconozca "Septiembre" y "Martes"
     try:
-        match = re.search(r'(\d{1,2}\s\w+\s\d{4})', date_string) 
-        if not match:
+        # Intentos para encontrar un locale español (incluyendo es_VE)
+        locales_espanol = ['es_VE.UTF-8', 'es_VE', 'es_ES.UTF-8', 'es_ES', 'Spanish', 'es']
+        
+        locale_encontrado = False
+        for loc in locales_espanol:
+            try:
+                # locale.LC_TIME especifica que solo cambiamos el formato de hora y fecha
+                locale.setlocale(locale.LC_TIME, loc)
+                locale_encontrado = True
+                break
+            except locale.Error:
+                continue
+        
+        if not locale_encontrado:
+            # Reemplaza 'print' por 'logger.error' en tu código final
+            # print("Error: No se pudo configurar un locale español válido para el sistema.") 
+            logger.error("No se pudo configurar un locale español válido.")
             return None
+
+    except Exception as e:
+        # Reemplaza 'print' por 'logger.error' en tu código final
+        # print(f"Error al intentar configurar el locale: {e}") 
+        logger.error(f"Error al intentar configurar el locale: {e}")
+        return None
+
+# --- La lógica de conversión con datetime ---
+    try:
+        # 2. Limpieza de la cadena
+        # Reemplaza cualquier secuencia de espacios (\s+) por un único espacio ASCII (' '). 
+        # Esto soluciona problemas de espacios dobles o espacios duros (\xa0).
+        string_limpio = re.sub(r'\s+', ' ', date_string).strip()
         
-        date_part = match.group(1).strip()
-        fecha_obj = parser.parse(date_part) 
+        # 3. Parseo de la fecha (Patrón de formato estricto)
+        # El patrón "%A, %d %B %Y" debe coincidir con la cadena limpia: 
+        # "Martes, 30 Septiembre 2025"
+        fecha_obj = datetime.strptime(string_limpio, "%A, %d %B %Y")
         
-        # Formateamos al formato final DD/MM/AAAA
+        # 4. Formatear al formato final DD/MM/AAAA
         return fecha_obj.strftime("%d/%m/%Y")
         
+    except ValueError as e:
+        # Reemplaza 'print' por 'logger.error' en tu código final
+        # print(f"Error al parsear la fecha con datetime (ValueError): {e}")
+        logger.error(f"Error al parsear la fecha con datetime (ValueError): {e}. Cadena: '{string_limpio}'")
+        return None
     except Exception as e:
-        logger.error(f"Error al parsear la fecha con dateutil: {e}")
+        # Reemplaza 'print' por 'logger.error' en tu código final
+        # print(f"Error inesperado durante el parseo: {e}")
+        logger.error(f"Error inesperado durante el parseo: {e}")
         return None
     
 def _get_mercado_rate():

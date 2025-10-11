@@ -111,6 +111,8 @@ def build_main_keyboard() -> InlineKeyboardMarkup:
         [InlineKeyboardButton("📊 Análisis de Compra", callback_data='flow_compra')],
         [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='flow_oportunidad')],
         [InlineKeyboardButton("💱 Conversión de Precios", callback_data='flow_cambio')],
+        # 🚨 NUEVO BOTÓN 🚨
+        [InlineKeyboardButton("⚖️ Punto de Equilibrio", callback_data='reporte_equilibrio')], 
         [InlineKeyboardButton("🔔 Configurar Alerta", callback_data='flow_alerta')],
         [InlineKeyboardButton("📊 Reporte Diario", callback_data='reporte_diario')],
         [InlineKeyboardButton("📈 Volatilidad (48h)", callback_data='volatilidad_48h')],
@@ -426,16 +428,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data.pop('flow', None) 
     context.user_data.pop('currency', None) 
     
-    # keyboard = [
-    #     [InlineKeyboardButton("📊 Análisis de Compra", callback_data='flow_compra')],
-    #     [InlineKeyboardButton("📈 Costo de Oportunidad", callback_data='flow_oportunidad')],
-    #     [InlineKeyboardButton("💱 Conversión de Precios", callback_data='flow_cambio')],
-    #     [InlineKeyboardButton("🔔 Configurar Alerta", callback_data='flow_alerta')], # Listo para el futuro
-    #     [InlineKeyboardButton("📊 Reporte Diario", callback_data='reporte_diario')], # Listo para el futuro
-    #     [InlineKeyboardButton("📈 Volatilidad (48h)", callback_data='volatilidad_48h')], # Listo para el futuro
-    # ]
-    # reply_markup = InlineKeyboardMarkup(keyboard)
-        # ✅ USO DE LA FUNCIÓN AUXILIAR
     reply_markup = build_main_keyboard()
     
     if update.message:
@@ -685,6 +677,37 @@ async def handle_main_menu_callbacks(update: Update, context: ContextTypes.DEFAU
     # Dejaremos que el ConversationHandler se encargue de los otros flujos para no tocar start.
     return BotState.START.value
 
+# app/notifier.py (Añadir entre las funciones de comandos)
+
+async def break_even_point_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Muestra el reporte del Punto de Equilibrio (Break-Even), manejando Command y Callback."""
+    
+    # 1. Identificar la fuente del Update y el objeto para responder
+    if update.callback_query:
+        query = update.callback_query
+        await query.answer() 
+        message_container = query.message
+    elif update.message:
+        message_container = update.message
+    else:
+        return BotState.START.value 
+
+    # 2. Notificar que se está procesando
+    if update.effective_chat:
+        await update.effective_chat.send_chat_action(action='TYPING')
+    
+    # 3. Obtener la información de las tasas y el cálculo
+    calculator = ExchangeRateCalculator()
+    reporte = calculator.get_break_even_report() 
+
+    # 4. Enviar el reporte
+    await message_container.reply_text(
+        text=reporte, 
+        parse_mode='Markdown'
+    )
+
+    # 5. Finalizar la conversación y regresar al estado inicial
+    return BotState.START.value
 # app/notifier.py (Añadir estas funciones a la sección de handlers)
 
 from src.database_manager import save_user_alert # <--- Asegúrate de importar esto
@@ -830,7 +853,10 @@ def start_bot():
     # --- HANDLER PRINCIPAL DE CONVERSACIÓN (REEMPLAZA EL FLUJO MANUAL) ---
     # ----------------------------------------------------------------------
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
+        entry_points=[
+            CommandHandler('start', start),
+            CommandHandler('equilibrio', break_even_point_command), 
+            ],
         
         states={
             # # 0. ESTADO INICIAL: Espera la selección de flujo (Compra, Oportunidad, Cambio, Alerta)
@@ -841,6 +867,8 @@ def start_bot():
         BotState.START.value: [
             # 🚨 AÑADE ESTE HANDLER AQUÍ 🚨
             CallbackQueryHandler(select_flow, pattern='^flow_'),
+                # 🚨 NUEVA LÍNEA: Manejar el botón de Punto de Equilibrio 🚨
+            CallbackQueryHandler(break_even_point_command, pattern='^reporte_equilibrio$'), 
             CallbackQueryHandler(handle_main_menu_callbacks, pattern='^reporte_diario$|^volatilidad_48h$'),
             
             # Los otros handlers para los flujos principales (flow_compra, etc.)
@@ -886,6 +914,8 @@ def start_bot():
                 # El input de texto llama a la función final de guardado
                 MessageHandler(filters.TEXT & ~filters.COMMAND, save_alert_and_end)
                 ],
+
+            
         },
         
         fallbacks=[CommandHandler('cancelar', cancel), CommandHandler('start', start)]

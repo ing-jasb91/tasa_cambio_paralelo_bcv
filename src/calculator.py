@@ -1,11 +1,11 @@
 # src/calculator.py
 import logging
-from src.database_manager import get_latest_rates, get_24h_market_summary 
+from src.database_manager import get_latest_rates, get_24h_market_summary, get_historical_rates
 # Asegúrate de importar get_24h_market_summary si la usas en el futuro para análisis
 # (Aunque no está aquí, es buena práctica si la vas a usar).
 import pytz
 from datetime import datetime
-
+import numpy as np 
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -60,6 +60,24 @@ class ExchangeRateCalculator:
             self.EUR_MERCADO_REDONDEADA = round(self.EUR_MERCADO_CRUDA / 10) * 10
         else:
             logger.warning("Faltan tasas críticas (BCV USD o Mercado USD o Forex EUR/USD). Cálculos deshabilitados.")
+
+        # Tasa de Compra (Referencia USD a VEF)
+        self.USD_MERCADO_COMPRA = self.USD_MERCADO_CRUDA * 1.02 # Tasa de Mercado + 2%
+        # Tasa de Venta (Referencia VEF a USD)
+        self.USD_MERCADO_VENTA = self.USD_MERCADO_CRUDA * 0.98  # Tasa de Mercado - 2%
+
+        # 1. Tasa del Punto de Equilibrio (Break-Even Point) 🚨
+        # Es la tasa a la que tengo que vender los VEF que compré a BCV para igualar el costo USD.
+        # Se calcula asumiendo que el costo inicial de los dólares es BCV.
+        if self.USD_BCV is not None and self.USD_MERCADO_COMPRA is not None:
+            # Fórmula: Costo BCV / (1 - %Comisión)
+            # Asumamos una comisión de venta de 0.5% sobre la transacción.
+            COMISION_VENTA = 0.005
+            self.USD_BREAK_EVEN = self.USD_BCV / (1 - COMISION_VENTA)
+        else:
+            self.USD_BREAK_EVEN = None 
+
+
 
     def is_valid(self):
         """Verifica si la calculadora se inicializó con tasas válidas."""
@@ -300,6 +318,14 @@ class ExchangeRateCalculator:
         # Cálculo de métricas del USD (se mantienen)
         diferencia_cifras = tasa_mercado_cruda - tasa_bcv_usd
         diferencia_porcentaje = (diferencia_cifras / tasa_bcv_usd) * 100
+
+        # 🚨 NUEVO CÁLCULO: Tasa Implícita de Ganancia / Markup Implícito
+        # Se asume que el costo es el BCV y la venta es la tasa de mercado
+        # Markup = ((Venta - Costo) / Costo) * 100
+        if tasa_bcv_usd > 0:
+            markup_implicito = ((tasa_mercado_cruda - tasa_bcv_usd) / tasa_bcv_usd) * 100
+        else:
+            markup_implicito = 0.0
         
         # --- Generación del Reporte (Formato Requerido) ---
         
@@ -307,6 +333,9 @@ class ExchangeRateCalculator:
         now_utc = datetime.now(pytz.utc)
         now_venezuela = now_utc.astimezone(pytz.timezone('America/Caracas'))
         timestamp_str = now_venezuela.strftime('%d/%m/%Y %I:%M a.m. VET').replace('AM', 'a.m.').replace('PM', 'p.m.')
+
+        # Obtener análisis de riesgo
+        risk_analysis = self.analyze_risk_and_trend()
 
         reporte = (
             f"🌟 *REPORTE DE TASAS* 🔵 *Stats Dev* 🇻🇪\n"
@@ -317,7 +346,9 @@ class ExchangeRateCalculator:
             f"💰 *BCV OFICIAL (USD)*: {format_currency(tasa_bcv_usd, decimals=4)} Bs\n"
             f"💵 *MERCADO CRUDA (USD)*: {format_currency(tasa_mercado_cruda, decimals=4)} Bs\n"
             f"✨ *REFERENCIAL DE CÁLCULO*: {format_currency(tasa_mercado_redondeada, decimals=2)} Bs\n\n"
-            
+            f"**Ganancia Implícita (Markup): {format_currency(markup_implicito, decimals=2)}%**\\n\\n"
+
+
             f"💶 *EURO (BCV)*: {format_currency(tasa_bcv_eur, decimals=4)} Bs\n"
             f"🇪🇺 *EURO (MERCADO)*: {format_currency(tasa_mercado_cruda * eurusd_forex, decimals=4)} Bs\n" # Asumiendo EUR Mercado = USD Mercado * EUR/USD FOREX
             f"💹 *EUR/USD Forex*: {format_currency(eurusd_forex, decimals=5)}\n"
@@ -337,6 +368,19 @@ class ExchangeRateCalculator:
                 f"⬇️ *Mínimo*: {format_currency(summary_24h['min'], decimals=4)} Bs\n"
                 f"promedio de {summary_24h['count']} registros\n\n"
             )
+
+            # 🚨 MÉTRICAS AVANZADAS 🚨
+            if risk_analysis['std_dev'] is not None:
+                reporte += (\
+                    f"σ *Desviación Estándar*: {format_currency(risk_analysis['std_dev'], decimals=4)} Bs\n"
+                    f"_(Riesgo: ⬆️ mayor valor = mayor volatilidad)_\n"
+                    f"🔸 *Media Móvil (SMA 24h)*: {format_currency(risk_analysis['sma_24h'], decimals=4)} Bs\n"
+                    f"📊 *Tendencia*: {risk_analysis['trend']}\n\n"
+                )
+            else:
+                 reporte += f"_No hay suficientes datos históricos (24h) para el análisis avanzado._\n\n"
+
+
         else:
             reporte += f"📈 *VOLATILIDAD (Últimas 24h) - Gráfico abajo* \n_No hay suficientes datos históricos (24h) para el resumen._\n\n"
 
@@ -351,5 +395,92 @@ class ExchangeRateCalculator:
 
         return reporte
     
+    # ----------------------------------------------------------------------
+    # 5. REPORTE DE PUNTO DE EQUILIBRIO (NUEVO)
+    # ----------------------------------------------------------------------
+    def get_break_even_report(self) -> str:
+        """Calcula y reporta el Punto de Equilibrio al vender los bolívares."""
+        if not self.is_valid():
+            return "❌ No se pudieron obtener las tasas de cambio desde la base de datos."
+
+        tasa_bcv = self.USD_BCV
+        tasa_break_even = self.USD_BREAK_EVEN
+        tasa_mercado_venta = self.USD_MERCADO_VENTA
+        
+        # Asumimos que la comisión de venta es 0.5% (definida en _set_rates)
+        COMISION_VENTA = 0.005 # 0.5%
+
+        if tasa_break_even is None:
+             return "❌ No se pudo calcular el Punto de Equilibrio."
+             
+        diferencia_break_even = tasa_mercado_venta - tasa_break_even
+        
+        if diferencia_break_even > 0:
+            recomendacion = "✅ *¡Venta con Ganancia!* Tu tasa de venta actual está *POR ENCIMA* del punto de equilibrio."
+        elif diferencia_break_even < 0:
+            recomendacion = "⚠️ *¡Venta con Pérdida!* Tu tasa de venta actual está *POR DEBAJO* del punto de equilibrio."
+        else:
+            recomendacion = "Neutral. Estás vendiendo exactamente en el punto de equilibrio."
+
+        reporte = (
+            f"⚖️ *Análisis de Punto de Equilibrio (Break-Even)*\n\n"
+            f"1. *Tasa de Compra Inicial* (Costo USD): {format_currency(tasa_bcv, decimals=4)} Bs/USD (BCV)\n"
+            f"2. *Costo de Salida* (Comisión venta): {format_currency(COMISION_VENTA * 100, decimals=2)}% (Ej. P2P)\n\n"
+            f"🔥 *Punto de Equilibrio (Break-Even)*:\n"
+            f"  `{format_currency(tasa_break_even, decimals=4)}` Bs/USD\n"
+            f"  _(Tasa a la que debes vender para *no perder* dinero.)_\n\n"
+            f"💰 *Tasa de Venta Actual* (Referencial): {format_currency(tasa_mercado_venta, decimals=4)} Bs/USD\n\n"
+            f"{recomendacion}\n"
+            f"Diferencia: {format_currency(abs(diferencia_break_even), decimals=4)} Bs"
+        )
+        return reporte
+    
     def display_current_rates(self):
         print(self.get_exchange_rates_report())
+
+# src/calculator.py (Dentro de la clase ExchangeRateCalculator)
+
+    # ----------------------------------------------------------------------
+    # 5. ANÁLISIS DE VOLATILIDAD Y TENDENCIA (NUEVO)
+    # ----------------------------------------------------------------------
+
+    def analyze_risk_and_trend(self):
+        """Calcula la Desviación Estándar y la Tendencia (SMA) de 24h."""
+        
+        # 1. Obtener datos históricos de las últimas 24 horas
+        # NOTA: Necesitas implementar 'get_historical_rates(24)' en database_manager.py
+        # para que devuelva una lista de solo los valores de USD_MERCADO_CRUDA.
+        # Por ahora, usamos una función ficticia que llamaremos:
+        from src.database_manager import get_historical_rates 
+        historical_rates = get_historical_rates(hours=24) 
+        
+        if not historical_rates or len(historical_rates) < 5:
+            return {
+                'std_dev': None, 
+                'sma_24h': None,
+                'trend': 'Insuficientes datos históricos (menos de 5 registros en 24h).'
+            }
+
+        rates_array = np.array(historical_rates)
+        
+        # 2. Cálculo de Desviación Estándar (Métrica de Riesgo)
+        std_dev = np.std(rates_array)
+        
+        # 3. Cálculo de Media Móvil Simple (SMA de 24 horas)
+        sma_24h = np.mean(rates_array)
+        
+        # 4. Determinación de Tendencia (Métrica de Dirección)
+        current_rate = self.USD_MERCADO_CRUDA
+        
+        if current_rate > sma_24h:
+            trend = "📈 Alcista (El precio actual está por encima del promedio de 24h)"
+        elif current_rate < sma_24h:
+            trend = "📉 Bajista (El precio actual está por debajo del promedio de 24h)"
+        else:
+            trend = "➡️ Lateral (El precio actual está cerca del promedio de 24h)"
+
+        return {
+            'std_dev': std_dev,
+            'sma_24h': sma_24h,
+            'trend': trend
+        }

@@ -1,4 +1,5 @@
 venv/
+tax/
 # .gitignore
 
 # Ignorar archivos temporales
@@ -6,6 +7,11 @@ __pycache__/
 
 # Base de datos
 data/exchange_rates.db
+data/*
 
 # Claves de entorno
 .env 
+
+# Logs
+# logs/*.log
+logs/*

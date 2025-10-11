@@ -1,1 +1,604 @@
-2025-10-05 19:37:00 [ERROR] [src.data_fetcher.fetch_forex_eur_usd_rate:148] - Error de conexión con la API de  ExchangeRate-API: HTTPSConnectionPool(host='v6.exchangerate-api.com', port=443): Max retries exceeded with url: /v6/502ab14943ca425c6c115d45/pair/EUR/USD (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000014F199ADD10>, 'Connection to v6.exchangerate-api.com timed out. (connect timeout=8)'))
+2025-10-06 23:44:42 [ERROR] [src.data_fetcher._convert_date_format:107] - Error al parsear la fecha con dateutil: expected string or bytes-like object, got 'NoneType'
+2025-10-07 00:57:38 [ERROR] [root.start_bot:839] - Fallo en la actualización inicial. El bot usará datos viejos. Error: type object 'datetime.datetime' has no attribute 'datetime'
+2025-10-07 05:27:12 [ERROR] [telegram.ext.Application.process_error:1940] - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.READ_NUM_BYTES, timeout=timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 134, in network_retry_loop
+    await do_action()
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 127, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 676, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 4780, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 372, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 303, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ReadError: 
+2025-10-07 17:30:32 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-07 17:41:11 [ERROR] [src.data_fetcher._scrape_bcv_rates:66] - FALLO DE CONEXIÓN o HTTP NO 200 con BCV: 504 Server Error: Gateway Time-out for url: https://www.bcv.org.ve/
+2025-10-07 17:41:12 [ERROR] [src.data_fetcher.get_exchange_rates:272] - Fallo la obtención de tasas críticas (USD BCV o USD Mercado). Retornando None.
+2025-10-07 17:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 18:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 19:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 20:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 20:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 20:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 20:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 20:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:10:26 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:20:25 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 21:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 22:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-07 23:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 00:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 01:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 02:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 03:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 04:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:00:29 [ERROR] [root.send_hourly_report:179] - Error al enviar la foto/reporte al chat: Timed out
+2025-10-08 05:00:29 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-08 05:00:34 [ERROR] [telegram.ext.Application.process_error:1940] - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_jobqueue.py", line 998, in _run
+    await self.callback(context)
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\app\notifier.py", line 369, in update_exchange_rates
+    await context.bot.send_message(
+    ...<3 lines>...
+    )
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 3107, in send_message
+    return await super().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 1118, in send_message
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<21 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 634, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 819, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 372, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+2025-10-08 05:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 05:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 06:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 07:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 08:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:00:26 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 09:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 10:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 11:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 12:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:20:28 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-08 13:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:30:28 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-08 13:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 13:50:33 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-08 14:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 14:10:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 14:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 14:30:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 14:40:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 14:50:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:00:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:20:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 15:50:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 16:00:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 16:10:23 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 16:20:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 16:30:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 16:40:22 [ERROR] [src.data_fetcher._convert_date_format:163] - Error al parsear la fecha con datetime (ValueError): time data 'Miércoles, 08 Octubre 2025' does not match format '%A, %d %B %Y'. Cadena: 'Miércoles, 08 Octubre 2025'
+2025-10-08 21:30:33 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-09 13:00:31 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-09 13:06:39 [ERROR] [telegram.ext.Application.process_error:1940] - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.READ_NUM_BYTES, timeout=timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2032.0_x64__qbz5n2kfra8p0\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_handlers\conversationhandler.py", line 843, in handle_update
+    new_state: object = await handler.handle_update(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        update, application, handler_check_result, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\app\notifier.py", line 434, in start
+    await update.message.reply_text('¡Hola! Elige una opción para continuar:', reply_markup=reply_markup)
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_message.py", line 2060, in reply_text
+    return await self.get_bot().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<21 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 3107, in send_message
+    return await super().send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 1118, in send_message
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<21 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 634, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<23 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 819, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\ext\_extbot.py", line 372, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Jhon Serrano\Documents\VSCODE\tasa_cambio_paralelo_bcv\tax\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+2025-10-09 14:00:28 [ERROR] [root.update_exchange_rates:368] - Fallo al enviar la foto de volatilidad: Timed out. Enviando solo texto.
+2025-10-09 14:00:28 [ERROR] [root.send_hourly_report:179] - Error al enviar la foto/reporte al chat: Timed out

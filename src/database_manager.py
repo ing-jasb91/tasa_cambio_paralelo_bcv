@@ -99,15 +99,19 @@ def save_bcv_rates(data: dict) -> bool:
     conn = _connect_db()
     if conn is None:
         return False
-
+    now_iso = datetime.now().isoformat()
     try:
         cursor = conn.cursor()
         # Se usa INSERT OR IGNORE para evitar errores si ya existe la fecha (clave primaria)
+        # cursor.execute("""
+        #     INSERT OR IGNORE INTO BCV_RATES (date, USD_BCV, EUR_BCV, CNY_BCV, TRY_BCV, RUB_BCV)
+        #     VALUES (?, ?, ?, ?, ?, ?)
+        # """, (
         cursor.execute("""
-            INSERT OR IGNORE INTO BCV_RATES (date, USD_BCV, EUR_BCV, CNY_BCV, TRY_BCV, RUB_BCV)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT OR IGNORE INTO BCV_RATES (date, timestamp_saved, USD_BCV, EUR_BCV, CNY_BCV, TRY_BCV, RUB_BCV)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
-            data['date'], data['USD_BCV'], data['EUR_BCV'], 
+            data['date'], now_iso, data['USD_BCV'], data['EUR_BCV'], 
             data.get('CNY_BCV', 0.0), data.get('TRY_BCV', 0.0), data.get('RUB_BCV', 0.0)
         ))
         conn.commit()
@@ -314,6 +318,53 @@ def update_alert_rate_and_status(alert_id: int, new_rate: float, deactivate: boo
     except sqlite3.Error as e:
         logger.error(f"Error al actualizar estado de la alerta {alert_id}: {e}")
         return False
+    finally:
+        if conn:
+            conn.close()
+
+
+# src/database_manager.py (Añadir la nueva función)
+
+def get_historical_rates(hours: int = 24) -> list[float]:
+    """
+    Consulta la base de datos para obtener una lista simple de las tasas de 
+    USD_MERCADO_CRUDA registradas en las últimas 'hours' horas.
+    
+    Args:
+        hours (int): Número de horas a consultar.
+        
+    Returns:
+        list[float]: Lista de los valores de la tasa de mercado.
+    """
+    conn = _connect_db()
+    if conn is None:
+        return []
+
+    try:
+        cursor = conn.cursor()
+        
+        # 1. Definir la marca de tiempo límite (en formato ISO para SQLite)
+        time_limit = datetime.now() - timedelta(hours=hours)
+        time_limit_iso = time_limit.isoformat()
+        
+        # 2. Consulta SQL: Seleccionar solo la tasa
+        query = f"""
+            SELECT USD_MERCADO_CRUDA
+            FROM MARKET_RATES 
+            WHERE timestamp >= ? 
+            ORDER BY timestamp ASC
+        """
+        cursor.execute(query, (time_limit_iso,))
+        
+        # 3. Extraer solo los valores de la tasa y devolverlos como una lista de floats
+        rates = [row['USD_MERCADO_CRUDA'] for row in cursor.fetchall()]
+        
+        # Filtrar posibles valores None o cero
+        return [rate for rate in rates if rate is not None and rate > 0]
+        
+    except sqlite3.Error as e:
+        logger.error(f"Error al obtener tasas históricas para el análisis de riesgo: {e}")
+        return []
     finally:
         if conn:
             conn.close()
